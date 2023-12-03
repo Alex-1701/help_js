@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 4.4</title>
+  <style>
+    p {
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+
+    main();
+
+    function main() {
+      let fruits = ["apple", "pineapple", "mango", "melon", "grape"];
+      let citrus = ["orange", "lemon", "lime"];
+      let fruitsCitrus = fruits.concat(citrus);
+      let add = ["pear", "cherry", "plum", "raspberry", "strawberry"];
+
+      let fruitsPlus = fruits.slice();
+      for (let i = 0; i < add.length; i++) {
+        fruitsPlus.splice(i + 3, 0, add[i]);
+      }
+
+      let fruitsMinus = fruits.slice(0, fruits.length - 3);
+
+      let fruitsSort = fruits.slice(0, fruits.length);
+      fruitsSort.sort();
+
+      let fruitsSortReverse = fruits.slice(0, fruits.length);
+      fruitsSortReverse.sort(function (a, b) { return -a.localeCompare(b); });
+
+      let fruitsSortLen = fruits.slice(0, fruits.length);
+      fruitsSortLen.sort(function (a, b) { return a.length - b.length; });
+
+      print_array(fruits); // а
+      print_array(citrus); // б
+      print_array(fruitsCitrus); // в
+      print_array(fruitsPlus); // г
+      print_array(fruitsMinus); // д
+      print_array(fruitsSort); // е
+      print_array(fruitsSortReverse); // ж
+      print_array(fruitsSortLen); // з
+    }
+
+    function print_array(array) {
+      document.write("<p>");
+      let str = JSON.stringify(array, null, 2);
+      document.write(str);
+      document.write("</p>");
+    }
+  </script>
+</body>
+
+</html>

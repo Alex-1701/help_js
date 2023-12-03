@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Защита 20 Коледа Алексей ИП-32</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        "use strict"
+        let n = 100;
+        let x = 7;
+
+        let y = cos_x(x, n);
+        let real = Math.cos(x);
+
+        print_string('cos(' + x + ') = &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + y);
+        print_string('Math.cos(' + x + ') = \t' + real);
+        print_string('dif = ' + (real - y));
+
+        function cos_x(x, n = 1) {
+            let temp = ((-1) ** n) * (x ** (2 * n)) / (factorial(2 * n));
+            if (n > 0) {
+                return temp + cos_x(x, n - 1);
+            } else {
+                return temp;
+            }
+        }
+
+        function factorial(number) {
+            let res = 1;
+            while (number > 1) {
+                res *= number;
+                number--;
+            }
+            return res;
+        }
+
+        function print_string(str = '---') {
+            document.write("<p>");
+            document.write(str);
+            document.write("</p>");
+        }
+    </script>
+</body>
+
+</html>

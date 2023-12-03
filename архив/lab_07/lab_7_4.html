@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 7.4 Коледа Алексей ИП-32</title>
+  <style>
+    table {
+      border: 2px solid black;
+      background-color: gray;
+    }
+
+    td {
+      height: 40px;
+      width: 40px;
+      border: 2px solid black;
+    }
+
+    td:hover {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td style="background-color: rgb(0, 0, 255);"></td>
+      <td style="background-color: rgb(0, 255, 255);"></td>
+      <td style="background-color: rgb(255, 255, 255);"></td>
+      <td style="background-color: rgb(255, 255, 0);"></td>
+      <td style="background-color: rgb(255, 0, 0);"></td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(0, 0, 192);"></td>
+      <td style="background-color: rgb(0, 192, 192);"></td>
+      <td style="background-color: rgb(192, 192, 192);"></td>
+      <td style="background-color: rgb(192, 192, 0);"></td>
+      <td style="background-color: rgb(192, 0, 0);"></td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(0, 0, 128);"></td>
+      <td style="background-color: rgb(0, 128, 128);"></td>
+      <td style="background-color: rgb(128, 128, 128);"></td>
+      <td style="background-color: rgb(128, 128, 0);"></td>
+      <td style="background-color: rgb(128, 0, 0);"></td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(0, 0, 64);"></td>
+      <td style="background-color: rgb(0, 64, 64);"></td>
+      <td style="background-color: rgb(64, 64, 64);"></td>
+      <td style="background-color: rgb(64, 64, 0);"></td>
+      <td style="background-color: rgb(64, 0, 0);"></td>
+    </tr>
+  </table>
+
+  <script>
+    "use strict"
+
+    let cells = document.getElementsByTagName('td');
+
+    for (const key in cells) {
+      if (Object.hasOwnProperty.call(cells, key)) {
+        const element = cells[key];
+        element.addEventListener('click', () => {
+          document.body.style.backgroundColor = event.currentTarget.style.backgroundColor;
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

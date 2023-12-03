@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>lab 1.1</title>
+</head>
+
+<body>
+    <script>
+        "use strict"
+        let price1 = parseFloat(prompt("Введите цену 1 покупки"));
+        let price2 = parseFloat(prompt("Введите цену 2 покупки"));
+        let sum = price1 + price2;
+
+        let succes = false;
+        let discount;
+        while (!succes) {
+            discount = parseFloat(prompt("Введите скидку в %"));
+            if (discount >= 1 && discount <= 5) {
+                succes = true;
+            }
+            else {
+                console.log("wrong");
+                alert("Величина скидки от 1% до 5%!!!");
+            }
+        }
+
+        let today = new Date();
+        let date = today.getDate() + "." + (today.getMonth() + 1) + "." + today.getFullYear() + " " + today.getHours() + ":" + today.getMinutes();
+
+        document.write(`
+            <div style="width:220px; margin: auto; border: 1px solid blue">
+                <p style="margin: 5px">ООО \"Евроторг\"</p>
+                <b style="display: block; text-align: center; margin: 5px">СПАСИБО ЗА ПОКУПКУ!</b>
+                <p style="display: block; text-align: center; margin: 5px">Дата покупки: ${date}</p>
+                
+                <p style="margin: 5px; height: 15px">Наименование товара</p>
+                <div  style="margin: 5px;">
+                    <div style="display:inline-block; width:10%; text-align: right"><p style="margin:0px">1</p></div>
+                    <div style="display:inline-block; width:80%; text-align: right"><p style="margin:0px">=${price1.toFixed(2)}</p></div>
+                </div>
+
+                <p  style="margin: 5px">Наименование товара</p>
+                <div  style="margin: 5px;">
+                    <div style="display:inline-block; width:10%; text-align: right"><p style="margin:0px">1</p></div>
+                    <div style="display:inline-block; width:80%; text-align: right"><p style="margin:0px">=${price2.toFixed(2)}</p></div>
+                </div>
+
+                <b style="margin: 5px">ИТОГО</b>
+                <br>
+                <b style="display: block; text-align: center; margin: 5px">${sum.toFixed(2)} BYN</b>
+                <p style="margin: 5px">Ваша скидка 5%</p>
+                <p style="display: block; text-align: center; margin: 5px">${(sum * discount * 0.01).toFixed(2)} BYN</p>
+                <b style="margin: 5px">СУММА СО СКИДКОЙ</b>
+                <br>
+                <b style="display: block; text-align: center">${(sum - sum * discount * 0.01).toFixed(2)} BYN</b>
+            </div>
+        `);
+    </script>
+</body>
+
+</html>

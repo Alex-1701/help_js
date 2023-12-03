@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 6.2 Коледа Алексей ИП-32</title>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+
+    function HardDrive(oType, oCapacity, oInterface, oSpeed) {
+      this.type = oType;
+      this.capacity = oCapacity;
+      this.interface = oInterface;
+      this.speed = oSpeed;
+
+      this.getType = function () {
+        return this.type;
+      }
+
+      this.getCapacity = function () {
+        return this.capacity;
+      }
+
+      this.getInterface = function () {
+        return this.interface;
+      }
+
+      this.getSpeed = function () {
+        return this.speed;
+      }
+    }
+
+    HardDrive.prototype.release;
+
+    HardDrive.prototype.getInfo = function (year) {
+      return this.type + ' ' + this.capacity + ' ' + this.interface + ' ' + this.speed;
+    }
+
+    let obj = new HardDrive('SSD', 125, 'PCI', 10000);
+    obj.release = 2008;
+
+    print_string('type: ' + obj.getType());
+    print_string('capacity: ' + obj.getCapacity());
+    print_string('interface: ' + obj.getInterface());
+    print_string('speed: ' + obj.getSpeed());
+
+    print_string(obj.release);
+    print_string(obj.getInfo());
+
+    function print_string(str) {
+      document.write("<p>");
+      document.write(str);
+      document.write("</p>");
+    }
+  </script>
+</body>
+
+</html>

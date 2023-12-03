@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Защита 16 Коледа Алексей ИП-32</title>
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <script>
+        "use strict"
+
+        let number = parseInt(prompt('Число: '));
+        let divider = 1;
+
+        let res = number + ' = 1';
+
+        while (number > 1) {
+            divider = 2;
+            let actual_divider;
+            while (divider <= number) {
+                //console.log(divider, number);
+                if (number % divider == 0) {
+                    actual_divider = divider;
+                    number = number / divider;
+
+                    //console.log('kek');
+                    //console.log(number);
+                    // Для выходаиз цикла.
+                    divider = number;
+                }
+                divider++;
+                //console.log('divider = ' + divider);
+            }
+            //number = number / actual_divider;
+            //console.log('--- ' + actual_divider + ' ---');
+            res += '*' + actual_divider;
+        }
+
+        print_string(res);
+
+        function print_string(str = '---') {
+            document.write("<p>");
+            document.write(str);
+            document.write("</p>");
+        }
+    </script>
+</body>
+
+</html>

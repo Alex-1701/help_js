@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 6.4 Коледа Алексей ИП-32</title>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+
+    class HardDrive {
+      constructor(oType, oCapacity, oInterface, oSpeed) {
+        this.type = oType;
+        this.capacity = oCapacity;
+        this.interface = oInterface;
+        this.speed = oSpeed;
+      }
+
+      getType() {
+        return this.type;
+      }
+      setType(oType) {
+        this.type = oType;
+      }
+
+      getCapacity() {
+        return this.capacity;
+      }
+      setCapacity(oCapacity) {
+        this.capacity = oCapacity;
+      }
+
+      getInterface() {
+        return this.interface;
+      }
+      setInterface(oInterface) {
+        this.interface = oInterface;
+      }
+
+      getSpeed() {
+        return this.speed;
+      }
+      setSpeed(oSpeed) {
+        this.speed = oSpeed;
+      }
+
+      getInfo() {
+        return this.type + ' ' + this.capacity + ' ' + this.interface + ' ' + this.speed;
+      }
+    }
+
+    class Kingston extends HardDrive {
+      getReleaseDate() {
+        return this.releaseDate;
+      }
+      setReleaseDate(oReleaseDate) {
+        this.releaseDate = oReleaseDate;
+      }
+
+      getPrice() {
+        return this.price;
+      }
+      setPrice(oPrice) {
+        this.price = oPrice;
+      }
+
+      getInfo() {
+        return this.type + ' ' + this.capacity + ' ' + this.interface + ' ' + this.speed + ' ' + this.releaseDate + ' ' + this.price;
+      }
+    }
+
+
+    let obj = new Kingston('SSD', 125, 'PCI', 10000);
+    obj.setPrice(100500);
+    obj.setReleaseDate(2007);
+
+    print_string('type: ' + obj.getType());
+    print_string('capacity: ' + obj.getCapacity());
+    print_string('interface: ' + obj.getInterface());
+    print_string('speed: ' + obj.getSpeed());
+    print_string('release: ' + obj.getReleaseDate());
+    print_string('price: ' + obj.getPrice());
+
+    print_string(obj.getInfo());
+
+    function print_string(str) {
+      document.write("<p>");
+      document.write(str);
+      document.write("</p>");
+    }
+  </script>
+</body>
+
+</html>

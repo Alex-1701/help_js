@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 2.4</title>
+  <style>
+    table {
+      border: 1px solid gray;
+    }
+
+    td {
+      width: 30px;
+      height: 30px;
+      border: 1px solid gray;
+      padding: 5px;
+      text-align: center;
+      font-size: 13pt;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="table_box" style="margin: auto; align-items: center;"></div>
+  <script>
+    let my_table = document.createElement("table");
+    let number = 0;
+    let n = 1;
+    for (let row = 0; row < 10; row++) {
+      let new_row = document.createElement("tr");
+      for (let col = 0; col < 10; col++) {
+        number++;
+        let new_cell = document.createElement("td");
+        new_cell.innerText = number;
+
+        // Раскраска трейгольных ячеек
+        if (n * (n + 1) / 2 == number) {
+          new_cell.style.color = "red";
+          n++;
+        }
+
+        new_row.appendChild(new_cell);
+      }
+      my_table.appendChild(new_row);
+    }
+    document.getElementById("table_box").appendChild(my_table);
+  </script>
+</body>
+
+</html>

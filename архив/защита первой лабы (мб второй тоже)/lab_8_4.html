@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="favicon.png" type="image/png">
+	<title>Задание 8.4 Коледа ИП-32</title>
+	<style>
+		div {
+			/*border: 3px dashed red;*/
+		}
+
+		input {
+			float: right;
+		}
+
+		#input_form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.form_part {
+			display: inline;
+			margin: 10px;
+		}
+
+		#form_bottom {
+			width: 40%;
+			margin-top: 10px;
+		}
+
+		#submit_button_box input {
+			float: none;
+		}
+
+		#submit_button_box {
+			text-align: center;
+		}
+
+		.button_box {
+			display: inline-block;
+			margin: 0px 0px;
+		}
+
+		#first_button {
+			float: left;
+		}
+
+		#second_button {
+			float: right;
+		}
+
+		#modal_window {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+
+			background-color: rgba(128, 128, 128, 0.7);
+		}
+
+		#modal_window_entry {
+			font-family: 'Courier New', Courier, monospace;
+			font-weight: 300;
+			font-size: 13pt;
+			color: black;
+			border: 2px solid gray;
+			background-color: white;
+			margin: 100px 100px 100px 100px;
+			padding: 10px 10px 10px 10px;
+
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: center;
+			align-items: center;
+		}
+
+		table {
+			border: 1px solid gray;
+			background-color: gray;
+		}
+
+		th {
+			height: 20px;
+			border: 1px solid gray;
+			background-color: rgb(223, 223, 223);
+			padding: 5px;
+			font-family: 'Courier New', Courier, monospace;
+			font-weight: bold;
+		}
+
+		td {
+			height: 20px;
+			border: 1px solid gray;
+			background-color: rgb(255, 255, 255);
+			padding: 5px;
+			font-family: 'Courier New', Courier, monospace;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<div id='modal_window' hidden>
+		<div id='modal_window_entry'>
+			<form id='input_form' onsubmit='process(event)'>
+				<div class='form_part'>
+					<label for='input_type'>Тип накопителя:</label>
+					<input type='text' id='input_type' required value="SSD">
+				</div>
+
+				<div class='form_part'>
+					<label for='input_capacity'>Ёмкость накопителя:</label>
+					<input type='number' id='input_capacity' required value="512">
+				</div>
+
+				<div class='form_part'>
+					<label for='input_tire'> интерфейс:</label>
+					<input type='text' id='input_tire' required value="PCI">
+				</div>
+
+				<div class='form_part'>
+					<label for='input_speed'> скорость накопителя:</label>
+					<input type='number' id='input_speed' required value="125000">
+				</div>
+
+				<div class='form_part'>
+					<label for='input_release'> год выпуска:</label>
+					<input type='number' id='input_release' required value="2018">
+				</div>
+
+				<div class='form_part'>
+					<label for='input_price'> цену накопителя:</label>
+					<input type='number' id='input_price' required value="23000">
+				</div>
+
+				<div class='form_part' id='submit_button_box'>
+					<input type="submit" value="Добавить">
+				</div>
+			</form>
+
+			<div id='form_bottom'>
+				<div class="button_box" id='first_button'>
+					<button onclick=''>Ищо</button>
+				</div>
+				<div class="button_box" id='second_button'>
+					<button onclick='close_form()'>Харош</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="class.js"></script>
+	<script>
+		"use strict"
+
+		let array = [];
+
+		show_form();
+
+		function process(event) {
+			// Предотвращает перезагрузку страницы.
+			event.preventDefault();
+
+			let type = input_type.value;
+			let capacity = parseInt(input_capacity.value);
+			let tire = input_tire.value;
+			let speed = parseInt(input_speed.value);
+			let release = parseInt(input_release.value);
+			let price = parseInt(input_price.value);
+
+			array.push(new Kingston(type, capacity, tire, speed, release, price));
+
+			// Очищаем форму
+			input_form.reset();
+			generateTable(array);
+		}
+
+		function show_form() {
+			modal_window.removeAttribute('hidden');
+		}
+
+		function close_form() {
+			modal_window.setAttribute('hidden', 'true');
+
+		}
+
+		function generateTable(array) {
+			if (document.getElementById('array_table')) {
+				// Таблица уже есть.
+				let table = document.getElementById('array_table');
+
+				let row = document.createElement("tr");
+				let properties = Object.entries(array.at(-1));
+
+				properties.forEach(key => {
+					let cell = document.createElement("td");
+					cell.innerText = key[1];
+					row.appendChild(cell);
+				});
+				table.appendChild(row);
+			} else {
+				// Таблицы ещё нет.
+
+				let prop_name = ['тип', 'ёмкость', 'интерфейс', 'скорость', 'год релиза', 'цена'];
+				let table = document.createElement("table");
+				table.id = 'array_table';
+				let row = document.createElement("tr");
+
+				prop_name.forEach(a => {
+					let cell = document.createElement("th");
+					cell.innerText = a;
+					row.appendChild(cell);
+				});
+
+				table.appendChild(row);
+
+				array.forEach(element => {
+					let row = document.createElement("tr");
+					let properties = Object.entries(element);
+
+					properties.forEach(key => {
+						let cell = document.createElement("td");
+						cell.innerText = key[1];
+						row.appendChild(cell);
+					});
+					table.appendChild(row);
+				});
+				document.body.appendChild(table);
+			}
+		}
+	</script>
+</body>
+
+</html>

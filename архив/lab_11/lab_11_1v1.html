@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Задание 11.1 v.1 Коледа ИП-32</title>
+    <script src="jQuery.js"></script>
+    <style>
+        body {
+            background-color: lightgray;
+            font-size: 14pt;
+            font-weight: bolder;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <img width="100px" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg">
+    <h3>Чили</h3>
+
+    <script>
+        "use strict"
+        const old_Cur_ID = 27;
+        const new_Cur_ID = 374;
+
+        fetch(`https://www.nbrb.by/api/exrates/currencies/${old_Cur_ID}`)
+            .then(res => res.json())
+            .then(res => {
+                //console.log(res);
+                $('body').append(`<p>${res.Cur_ID}</p>`);
+                $('body').append(`<p>${res.Cur_Name_Eng}</p>`);
+                $('body').append(`<p>${res.Cur_Name_Bel}</p>`);
+            });
+
+        fetch(`https://www.nbrb.by/api/exrates/rates/${new_Cur_ID}`)
+            .then(res => res.json())
+            .then(res => {
+                //console.log(res);
+                $('body').append(`<p>${res.Cur_OfficialRate}</p>`);
+            });
+    </script>
+</body>
+
+</html>

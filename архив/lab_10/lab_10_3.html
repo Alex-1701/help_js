@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Задание 10.3 Коледа ИП-32</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: lightgray;
+            font-size: 12pt;
+            padding: 10px;
+        }
+
+        div {
+            border: 2px dashed red;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        table {
+            border: 1px solid gray;
+            background-color: gray;
+        }
+
+        th {
+            height: 20px;
+            width: 20px;
+            border: 3px solid gray;
+            background-color: rgb(223, 223, 223);
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        td {
+            height: 20px;
+            border: 3px solid gray;
+            background-color: rgb(184, 184, 184);
+            color: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .active {
+            background-color: rgb(255, 255, 255);
+            color: rgba(0, 0, 0, 1);
+        }
+
+        .current {
+            color: rgb(255, 0, 0);
+            border: 3px solid red;
+        }
+
+        input {
+            margin-right: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <form onsubmit="start(event)">
+        <input id='input_date' type="date" value="2021-10-26" required>
+        <input id='click' type="submit" value="НЕ ЖМИ!!!">
+    </form>
+    <br>
+    <script>
+        "use strict"
+
+        // ДЛЯ ОТЛАДКИ.
+        //$("#click").click();
+
+        function start(event) {
+            event.preventDefault();
+
+            Date.prototype.daysInMonth = function () {
+                return 32 - new Date(this.getFullYear(), this.getMonth(), 32).getDate();
+            };
+
+            Date.prototype.getWeekDay = function () {
+                let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+                return days[this.getDay()];
+            };
+
+            let date = new Date(input_date.value);
+            let start_date = new Date(date.getFullYear(), date.getMonth(), 1);
+            let prev_date = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+            let diff = prev_date.daysInMonth() - start_date.getDay() + 1;
+            let array = [];
+            let date_start = diff;
+
+            let type = false;
+            let isCurrent = false;
+            for (let i = 0; i < 42; i++) {
+                if (date_start >= prev_date.daysInMonth() + 1 && type == false) {
+                    date_start = 1;
+                    type = true;
+                } else if (date_start >= date.daysInMonth() + 1 && type == true) {
+                    date_start = 1;
+                    type = false;
+                }
+                if (date_start == date.getDate() && type == true) {
+                    isCurrent = true;
+                }
+                array.push({ number: date_start, active: type, current: isCurrent });
+                isCurrent = false;
+                date_start += 1;
+            }
+            //console.log(array);
+            createTableFromArray(array);
+        }
+
+        function createTableFromArray(array) {
+            let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+
+            if ($('table').length > 0) {
+                $('table').remove();
+            }
+
+            $('body').append('<table></table>');
+            $('table').append(`<tr></tr>`);
+
+            for (const name of days) {
+                $('tr:last').append(`<th>${name}</th>`);
+            }
+
+            let count = 0;
+            for (let i = 0; i < 6; i++) {
+                $('table').append(`<tr></tr>`);
+                for (let j = 0; j < 7; j++) {
+                    $('tr:last').append(`<td>${array[count].number}</td>`);
+                    if (array[count].active) {
+                        $('td:last').addClass('active');
+                    }
+                    if (array[count].current) {
+                        $('td:last').addClass('current');
+                    }
+                    count++;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

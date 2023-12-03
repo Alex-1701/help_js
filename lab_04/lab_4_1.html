@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 4.1</title>
+  <style>
+    p {
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    "use strict";
+
+    print_array(fun_1(), "&nbsp;&nbsp;", "treug:");
+    print_array(fun_2(), "&nbsp;", "kvd:");
+    print_array(fun_3(), "&nbsp;", "unsorted rez:");
+    print_array(fun_3().sort(function (a, b) { return b - a; }), "&nbsp;", "sorted rez:   ");
+
+    function fun_1() {
+      let treug = [];
+
+      for (let i = 1; i <= 10; i++) {
+        treug.push(i * (i + 1) / 2);
+      }
+      return treug;
+    }
+
+    function fun_2() {
+      let kvd = [];
+      for (let i = 1; i <= 10; i++) {
+        kvd[i - 1] = i ** 2;
+      }
+      return kvd;
+    }
+
+    function fun_3() {
+      let a = fun_1();
+      let b = fun_2();
+      let rez = a.concat(b);
+      return rez;
+    }
+
+    function print_array(array, space_symbol = "", array_name = "", ) {
+      document.write("<p>");
+      document.write(array_name + space_symbol);
+      for (let i = 0; i < array.length; i++) {
+        document.write(array[i] + space_symbol);
+      }
+      document.write("</p>");
+    }
+
+  </script>
+</body>
+
+</html>

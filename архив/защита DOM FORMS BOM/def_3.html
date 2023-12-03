@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <script src="jQuery.js"></script>
+    <title>Защита D-F-B Задание 3 Коледа ИП-32</title>
+    <style>
+        body {
+            background-color: lightgray;
+            font-size: 14pt;
+            font-weight: bolder;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque nulla delectus vel inventore unde consectetur
+        dignissimos modi, corrupti, libero optio quidem quisquam eaque, repellat tempore laboriosam? Excepturi obcaecati
+        necessitatibus ea!</p>
+
+    <h1>Title</h1>
+
+    <ul>
+        <li>lol</li>
+        <li>kek</li>
+        <li>cheburek</li>
+    </ul>
+
+    <table class="my_class">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
+
+    <script>
+        "use strict"
+
+        //let body_object = document.body;
+        //console.log(body_object);
+
+        /*
+        for (const key in body_object) {
+            if (Object.hasOwnProperty.call(body_object, key)) {
+                const element = body_object[key];
+                console.log(element);
+            }
+        }
+        */
+
+        /*
+        for (const [key, value] of Object.entries(body_object)) {
+            console.log(`${key}: ${value}`);
+        }
+        */
+
+        //let body_array = body_object.children
+        /*for (const iterator of body_array) {
+            console.log(iterator);
+
+            console.log(iterator.children.length);
+        }*/
+
+        get_child(document.body);
+
+        function get_child(DOM_object) {
+            //console.log(DOM_object);
+            if (DOM_object.children.length > 0) {
+                let array = DOM_object.children;
+                for (const itr of array) {
+                    console.log(itr.nodeName);
+                    /*console.log(itr);
+                    console.log(itr.__proto__);
+                    //console.log(itr.innerText);
+                    console.log(itr.compact);
+                    console.log(itr.type);*/
+                    get_child(itr);
+                }
+            } else if (DOM_object.children.length == 0) {
+                if (DOM_object.nodeName != 'SCRIPT') {
+                    //console.log(DOM_object.nodeName);
+                    console.log(DOM_object.innerText);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 4.3 Коледа Алексей ИП-32</title>
+  <style>
+    div {
+      display: inline-block;
+      width: 30px;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+    let arr = [];
+    let x = parseFloat(prompt("Введите значение x"));
+
+    for (let i = 0; i < 15; i++) {
+      let sign = Math.pow(-1, Math.floor(Math.random() * 2));
+      arr.push(Math.floor(Math.random() * 10 * sign) + 1);
+    }
+
+    print_array(arr, " ");
+    change(arr, x);
+
+    function print_array(array, space_symbol = "") {
+      document.write("<p>");
+      for (let i = 0; i < array.length; i++) {
+        document.write("<div>" + array[i] + "</div>");
+      }
+      document.write("</p>");
+    }
+
+    function change(array, x) {
+      let count = 0;
+      let mult = 1;
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] < x)
+          count++;
+
+        // нечётные места, тоесть чётные индексы.
+        if (array[i] < 0 && Math.trunc(i % 2) != 0) {
+          mult *= array[i];
+          console.log("%carray[" + i + "] = " + array[i], "color:green;");
+        }
+        else {
+          console.log("%carray[" + i + "] = " + array[i], "color:red;");
+        }
+      }
+      document.writeln("<p>Произведение: " + mult + "</p>");
+      document.writeln("<p>Меньше " + x + ": " + count + " шт.</p>");
+    }
+
+  </script>
+</body>
+
+</html>

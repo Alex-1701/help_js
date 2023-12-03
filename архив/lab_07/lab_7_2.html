@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 7.2 Коледа Алексей ИП-32</title>
+</head>
+
+<body>
+  <ul>
+    <li><a href="https://example.com/">NASA</a></li>
+    <li><a href="D:/FAVICON.png">иконка</a></li>
+    <li><a href="https://example.com/">WikiPedia</a></li>
+    <li><a href="http://example.com/">Yandex</a></li>
+    <li><a href="http://example.com/">Google.com</a></li>
+    <li><a href="lab_7_1.html">предыдущая лаба</a></li>
+    <li><a href="http://example.com/">tut.by</a></li>
+    <li><a href="D:/[B.E._SHtern]_Kovcheg_47_Libra(b-ok.org).pdf">книжка</a></li>
+  </ul>
+
+  <script>
+    "use strict"
+
+    let object = document.getElementsByTagName('a');
+
+    for (const key in object) {
+      if (Object.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        let begin = element.href.slice(0, 5);
+
+        if (begin == 'https' || begin == 'http:') {
+          element.style.textDecoration = 'underline';
+          element.style.textDecorationStyle = 'dotted';
+          element.style.color = 'black';
+        }
+        else if (begin == 'file:') {
+          element.style.textDecoration = 'none';
+          element.style.fontFamily = "'Courier New', Courier, monospace";
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

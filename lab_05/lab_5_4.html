@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 5.4</title>
+  <style>
+    * {
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+    main();
+
+    function main() {
+      let string = 'О сколько нам открытий чудных Готовят просвещенья дух И опыт, сын ошибок трудных, И гений, парадоксов друг, И случай, бог изобретатель.'
+      let resStr = '';
+
+      document.writeln('<p>' + string + '</p>');
+
+      // Выделение слов с знаками препинания.
+      let wordsReg = RegExp('[а-яА-Я,.]+', 'g');
+      // Поиск букв слова.
+      let lettersReg = RegExp('[а-яА-Я]+', 'g');
+      // Поиск знаков препинания.
+      let punctuationReg = RegExp('[.,]+', 'g');
+      // Отделение первой и последней буквы слова.
+      let innerReg = RegExp('(?<=[а-яА-Я])[а-яА-Я]+(?=[а-яА-Я])', 'g');
+
+      // Получаем массив слов.
+      let words = string.match(wordsReg);
+
+      // Проходим по массиву слов.
+      for (let i = 0; i < words.length; i++) {
+        // Выкидываем знаки препинания.
+        let letters = words[i].match(lettersReg);
+        let punctuations = '';
+        if (words[i].match(punctuationReg) != null)
+          punctuations = words[i].match(punctuationReg);
+
+        // Если в слове больше 3 букв, то перемешивание имеетс смысл.
+        if (letters[0].length > 3) {
+          let innerLetters = letters[0].match(innerReg).toString();
+          let mixedLetters = shuffelWord(innerLetters);
+
+          // Результат - слово франкенштейн.
+          letters[0] = letters[0].slice(0, 1) + mixedLetters + letters[0].slice(-1);
+
+          // (?<=[а-яА-Я])[а-яА-Я.,]+(?=[а-яА-Я])
+        }
+
+        resStr = resStr.concat(letters[0] + punctuations + ' ');
+      }
+
+      document.writeln('<p>' + resStr + '</p>');
+    }
+
+    function shuffelWord(word) {
+      var shuffledWord = '';
+      word = word.split('');
+      while (word.length > 0) {
+        shuffledWord += word.splice(word.length * Math.random() << 0, 1);
+      }
+      return shuffledWord;
+    }
+  </script>
+</body>
+
+</html>

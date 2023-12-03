@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>lab 3.1 Коледа Алексей ИП-32</title>
+    <style>
+        * {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <script>
+        start();
+
+        function start() {
+            console.log("start");
+            weekDay(40, "понедельник", "red");
+            weekDay(35, "вторник", "orange");
+            weekDay(30, "среда", "yellow");
+            weekDay(25, "четверг", "green");
+            weekDay(20, "пятица", "blue");
+            weekDay(15, "суббота", "darkblue");
+            weekDay(10, "воскресенье", "purple");
+        }
+
+        function weekDay(size, day, color) {
+            document.writeln(`<p style="font-size:${size}pt; color:${color}">${day}</p>`);
+        }
+    </script>
+</body>
+
+</html>

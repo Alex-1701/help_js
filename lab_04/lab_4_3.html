@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 4.3</title>
+  <style>
+    div {
+      display: inline-block;
+      width: 30px;
+      text-align: right;
+    }
+    
+    p {
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+    let arr = [];
+    const SIZE = 15;
+    const a = parseFloat(prompt("Введите значение a"));
+    document.writeln("<p>a = " + a + "</p>");
+      
+    const b = parseFloat(prompt("Введите значение b"));
+    document.writeln("<p>b = " + b + "</p>");
+
+    for (let i = 0; i < SIZE; i++) {
+      arr.push(Math.floor(Math.random() * 10) + 1);
+    }
+
+    print_array(arr, " ");
+    count_in_interval(arr, a, b);
+    calculate_sum(arr, a, b);
+
+    function print_array(array, space_symbol = "") {
+      document.write("<p>");
+      for (let i = 0; i < SIZE; i++) {
+        document.write("<div>" + array[i] + "</div>");
+      }
+      document.write("</p>");
+    }
+
+    function count_in_interval(array, a, b) {
+      let count = 0;
+      
+      for (let i = 0; i < SIZE; i++) {
+        if (a <= array[i] && array[i] <= b)
+          count++;
+      }
+      
+      document.writeln("<p>Количество в промежутке [a, b]: " + count + "</p>");
+    }
+
+    function calculate_sum(array, a, b) {
+      let sum = 0;
+      for (let i = 2; i < SIZE; i += 3) {
+        sum += array[i];
+      }
+      
+      document.writeln("<p>Сумма на местах кратных 3 = " + sum + "</p>");
+    }
+
+  </script>
+</body>
+
+</html>

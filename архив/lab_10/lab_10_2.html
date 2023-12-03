@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Задание 10.2 Коледа ИП-32</title>
+    <script src="jQuery.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>-->
+    <style>
+        body {
+            background-color: lightgray;
+        }
+
+        main {
+            background-color: lightskyblue;
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            border: 2px solid gray;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #button_box {
+            display: flex;
+            flex-direction: row;
+            padding: 0px;
+            margin: 10px;
+        }
+
+        div {
+            /*border: 2px dashed red;*/
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #input_field_box {
+            padding: 0px;
+            margin: 10px;
+            height: 100px;
+            border: 2px solid gray;
+        }
+
+        .in_out_field {
+            background-color: lightgreen;
+            border: none;
+            width: 100%;
+            height: 50%;
+
+            margin: 0px;
+            padding: 0px 0px;
+            font-size: 20pt;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: right;
+        }
+
+        #actions_box {
+            width: 60%;
+            padding: 0px;
+            margin: 0px;
+            margin-right: 10px;
+        }
+
+        #number_box {
+            width: 40%;
+            padding: 0px;
+            margin: 0px;
+            margin-left: 10px;
+        }
+
+        table {
+            background-color: rgb(255, 0, 0);
+            font-size: 25pt;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        td {
+            border: 1px solid gray;
+            background-color: gray;
+            width: 70px;
+            height: 50px;
+            text-align: center;
+        }
+
+        td:hover {
+            border: 1px solid gray;
+            background-color: lightgray;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id='input_field_box'>
+            <p class='in_out_field' id='input_field'></p>
+            <p class='in_out_field' id='output_field'></p>
+        </div>
+        <div id='button_box'>
+            <div id='actions_box'>
+                <table>
+                    <tr>
+                        <td>*</td>
+                        <td>/</td>
+                        <td>+</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>(</td>
+                        <td>)</td>
+                        <td>^</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>clr</td>
+                        <td>del</td>
+                        <td colspan="2">Enter</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">save</td>
+                        <td colspan="2">load</td>
+                    </tr>
+                </table>
+            </div>
+            <div id='number_box'>
+                <table>
+                    <tr>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>.</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        "use strict"
+
+        let input_string = '';
+
+        $('td').click(add_to_input);
+
+        //$('body').keydown((event) => { console.log(event.which, event.key) });
+        $('body').keydown((event) => { add_to_input(event) });
+
+        function add_to_input() {
+            console.log(event.type);
+            
+            let val = '';
+            let key = '';
+            if (event.type == 'keydown') {
+                // Если нажатие клавиши на клавиатуре.
+                console.log(event.key);
+                val = event.key;
+                key = val;
+            } else if (event.type == 'click') {
+                // Если тык в кнопку на экране.
+                console.log(event.target.innerText);
+                val = event.target.innerText;
+            }
+
+            if (val == 'clr' || key == 'c') {
+                input_string = '';
+                error_off();
+            } else if (val == 'del' || key == 'd') {
+                input_string = input_string.slice(0, -1);
+                error_off();
+            } else if (val == 'save' || key == 's') {
+                localStorage.setItem('result', output_field.innerText);
+            } else if (val == 'load' || key == 'l') {
+                let res = localStorage.getItem('result');
+                if (res) {
+                    output_field.innerText = res;
+                }
+            } else if (val == 'Enter' || key == 'Enter') {
+                // Защита от ввода пустых строк.
+                if (input_string.length) {
+                    let result = solve(input_string);
+                    if (result == 'error') {
+                        // Если ошибка вычисления.
+                        error_on();
+                    } else {
+                        // Если всё чётко.
+                        output_field.innerText = result;
+                    }
+                }
+            } else {
+                if (val == '0' || val == '1' || val == '2' || val == '3' || val == '4' || val == '5' || val == '6' || val == '7' || val == '8' || val == '9' || val == '.' || val == '*' || val == '/' || val == '+' || val == '-' || val == '(' || val == ')' || val == '^') {
+                    input_string += val;
+                } else if (key == '0' || key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '.' || key == '*' || key == '/' || key == '+' || key == '-' || key == '(' || key == ')' || key == '^') {
+                    input_string += key;
+                }
+            }
+
+            // Update input string.
+            input_field.innerText = input_string;
+        }
+
+        function solve(str) {
+            str = parse_input_string(str);
+            let res = 0;
+            try {
+                res = eval(str);
+            } catch (error) {
+                return 'error';
+            }
+            return res;
+        }
+
+        function parse_input_string(str) {
+            let arr = str.split('');
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] == '^') {
+                    // Выделяем число или скобки.
+                    let temp_arr = ['**'];
+                    let left = arr.slice(0, i);
+                    let right = arr.slice(i + 1, arr.length);
+                    arr = left.concat(temp_arr);
+                    arr = arr.concat(right);
+                }
+            }
+            return arr.join('');
+        }
+
+
+        function error_on() {
+            $('#output_field').css('background-color', 'lightcoral');
+            output_field.innerText = 'error';
+        }
+
+        function error_off() {
+            $('#output_field').css('background-color', 'lightgreen');
+            output_field.innerText = '';
+        }
+    </script>
+</body>
+
+</html>

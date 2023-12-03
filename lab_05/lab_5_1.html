@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 5.1</title>
+  <style>
+    * {
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+
+    let string = 'Язык c++ имеет лишь один минус - надо в конце кажой строчки писать ; то ли дело JS ;)'; //prompt("Введите данные");
+    document.writeln(string + '<br>');
+    let counter_plus = 0, counter_minus = 0;
+
+    for (let i = 0; i < string.length; i++) {
+      if (string[i] == '+')
+        counter_plus++;
+      if (string[i] == '-')
+        counter_minus++;
+    }
+
+    let index = 0;
+
+    while (string.includes(';')) {
+      index = string.indexOf(';');
+      string = string.slice(0, index) + ',.' + string.slice(index + 1);
+    }
+
+    document.writeln(string + '<br>');
+    document.writeln('+ = ' + counter_plus + '<br>');
+    document.writeln('- = ' + counter_minus + '<br>');
+  </script>
+</body>
+
+</html>

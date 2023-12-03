@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 5.3 Коледа Алексей ИП-32</title>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+    let string = 'О сколько нам открытий чудных Готовят просвещенья дух И опыт, сын ошибок трудных, И гений, парадоксов друг, И случай, бог изобретатель.'
+    let resStr = '';
+
+    document.writeln('<p>' + string + '</p>');
+
+    for (let i = 0; i < string.length; i++) {
+      let char = string[i];
+      let number = char.charCodeAt(0) + 1;
+      if (char == 'я')
+        number = 'а'.charCodeAt(0);
+
+      if (char == 'Я')
+        number = 'А'.charCodeAt(0);
+
+      if (char == ' ')
+        number = ' '.charCodeAt(0);
+      resStr = resStr.concat(String.fromCharCode(number));
+    }
+
+    document.writeln('<p>' + resStr + '</p>');
+  </script>
+</body>
+
+</html>

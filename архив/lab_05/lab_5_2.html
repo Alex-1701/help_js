@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 5.2 Коледа Алексей ИП-32</title>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+    let string = 'О сколько нам открытий чудных Готовят просвещенья дух И опыт, сын ошибок трудных, И гений, парадоксов друг, И случай, бог изобретатель.'
+    document.writeln('<p>' + string + '</p>');
+
+    // Выделение всех слов.
+    let countAllWordsReg = RegExp('[а-яА-Я]+([^а-яА-Я])', 'g');
+    let countAllWords = string.match(countAllWordsReg);
+
+    // Выделение слов содежащих букву 'г' или 'Г'.
+    let countSpecialWordsReg = RegExp('[а-яА-Я]*[гГ][а-яА-Я]*', 'g');
+    let countSpecialWords = string.match(countSpecialWordsReg);
+
+    // Вствка '*' перед каждым словом.
+    let reg = RegExp('^|\\s(?=[а-яА-Я])', 'g');
+    let resStr = string.replace(reg, ' *');
+
+    document.writeln('<p>' + resStr + '</p>');
+    document.writeln('<p>' + "Количество слов без 'г': " + (countAllWords.length - countSpecialWords.length) + '</p>');
+  </script>
+</body>
+
+</html>

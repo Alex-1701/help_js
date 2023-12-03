@@ -1,0 +1,21 @@
+p {
+	border: 1px dashed green;
+	
+}
+
+.hidden {
+	display: none;	
+}
+
+div {
+	border: 2px dashed red;
+	width: 90%;
+	padding: 5px;
+	margin: 10px;
+}
+
+
+
+.form_part label, input, p {
+	display: inline;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 4.2 Коледа Алексей ИП-32</title>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+
+    let arr = [];
+
+    for (let i = 0; i < 15; i++) {
+      arr.push(Math.floor(Math.random() * 10) + 1);
+    }
+
+    print_array(arr, " ");
+    change(arr);
+    print_array(arr, " ");
+
+    function print_array(array, space_symbol = "") {
+      document.write("<p>");
+      for (let i = 0; i < array.length; i++) {
+        document.write(array[i] + space_symbol);
+      }
+      document.write("</p>");
+    }
+
+    function change(array) {
+      let max_ind = 0;
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] > array[max_ind])
+          max_ind = i;
+      }
+      let temp = array[5];
+      array[5] = array[max_ind];
+      array[max_ind] = temp;
+    }
+
+  </script>
+</body>
+
+</html>

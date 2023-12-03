@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Защита 22 Коледа Алексей ИП-32</title>
+    <style>
+        p {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <script>
+        "use strict"
+        let str1 = 'lol';
+        let str2 = 'hello!';
+
+        print_string('строка 1: ' + str1);
+        print_string('строка 2: ' + str2);
+        print_string();
+
+        let dif = Math.abs(str1.length - str2.length);
+        
+        let big = '';
+        if (str1.length > str2.length)
+            big = str1;
+        else 
+            big = str2;
+
+        for (let i = 0; i < dif; i++) {
+            print_string(big);
+        }
+        
+        function print_string(str = '---') {
+            document.write("<p>");
+            document.write(str);
+            document.write("</p>");
+        }
+    </script>
+</body>
+
+</html> 

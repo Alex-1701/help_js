@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вычисление значения функции</title>
+</head>
+<body>
+    <script>
+        function calculateFunction() {
+
+            let x = prompt("Введите значение x:");
+
+            if (x === null || x === "" || Math.abs(x)<=1) {
+                throw "Введено некорректное значение";
+                return;
+            }
+
+            x = parseFloat(x);
+
+            // Вычисление значения функции с помощью стандартных функций объекта Math
+            let mathResult = Math.log((x + 1) / (x - 1));
+
+            // Вычисление значения функции с помощью разложения в ряд Тейлора
+            let taylorResult = 0;
+            let term = 0;
+            let n = 0;
+
+            do {
+                term = 1 / ((2*n + 1) * Math.pow(x, (2*n + 1)));
+                taylorResult += term;
+                n++;
+            } while (Math.abs(term) > 0.000001);
+
+            document.write("Значение функции с использованием стандартных функций Math: " + mathResult + "<br>");
+            document.write("Значение функции с использованием разложения в ряд Тейлора: " + 2*taylorResult + "<br>");
+        }
+
+        calculateFunction();
+    </script>
+</body>
+</html>

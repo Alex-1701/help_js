@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 7.3 Коледа Алексей ИП-32</title>
+  <style>
+    p {
+      margin: 0;
+    }
+
+    .my {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <p>C</p>
+      <ul>
+        <li>
+          <p>Program Files</p>
+          <ul>
+            <li>
+              <p>Microsoft</p>
+            </li>
+            <li>
+              <p>Notepad++</p>
+            </li>
+            <li>
+              <p>WinRAR</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Users</p>
+          <ul>
+            <li>
+              <p>Alex</p>
+            </li>
+            <li>
+              <p>Admin</p>
+            </li>
+            <li>
+              <p>Public</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Windows</p>
+          <ul>
+            <li>
+              <p>assembly</p>
+            </li>
+            <li>
+              <p>ru-RU</p>
+            </li>
+            <li>
+              <p>System32</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>D</p>
+      <ul>
+        <li>
+          <p>Загрузки</p>
+          <ul>
+            <li>
+              <p>Картинки</p>
+            </li>
+            <li>
+              <p>Фотографии</p>
+            </li>
+            <li>
+              <p>Лабы</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Программирование</p>
+          <ul>
+            <li>
+              <p>РПИ (JS)</p>
+            </li>
+            <li>
+              <p>АВС</p>
+            </li>
+            <li>
+              <p>ТиВПО</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <script>
+    "use strict"
+    let pars = document.getElementsByTagName('p');
+
+    for (const key in pars) {
+      if (Object.hasOwnProperty.call(pars, key)) {
+        const element = pars[key];
+        element.addEventListener('mouseover', addToClass);
+        element.addEventListener('mouseout', removeFromClass);
+        element.addEventListener('click', toggle_attribute);
+      }
+    }
+
+    function addToClass() {
+      event.target.classList.add('my');
+    }
+
+    function removeFromClass() {
+      event.target.classList.remove('my');
+    }
+
+    function toggle_attribute() {
+      // Получаем родительский элемент li.
+      let parent = event.target.parentElement;
+      // Получаем всех потомков li, тоесть всех соседей this.
+      let childs = parent.childNodes;
+
+      for (const key in childs) {
+        if (Object.hasOwnProperty.call(childs, key)) {
+          const element = childs[key];
+          // Переключение атрибута для всех ul из массива потомков.
+          if (element.nodeName == 'UL') {
+            if (element.getAttribute('hidden') == 'true')
+              element.removeAttribute('hidden');
+            else
+              element.setAttribute('hidden', true);
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

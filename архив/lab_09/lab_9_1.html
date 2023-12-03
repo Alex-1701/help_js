@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Задание 9.1 Коледа ИП-32</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            border: 2px solid gray;
+            height: 98%;
+        }
+
+        iframe {
+            height: 96%;
+            width: 99%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form>
+        <!--
+            https://www.gstu.by/
+            https://example.com/
+            https://earth.nullschool.net/ru/#current/wind/surface/level/overlay=temp/orthographic=30.96,52.46,990/loc=30.958,52.459
+            https://naked-science.ru/
+        -->
+        <button type="button" onclick="move_vzad(event)">🢀 Взад</button>
+        <button type="button" onclick="move_nazad(event)">Назад 🢂</button>
+        <input id='adress_field' type="text" value="https://example.com/">
+        <button type="button" onclick="open_frame(event)">Открыть</button>
+        <input id='option_check' type="checkbox" value="kek">
+        <label for='option_check'>в новом окне</label>
+    </form>
+    <iframe id='my_frame' src="" frameborder="1" width="100%" height="100%"></iframe>
+
+    <script>
+        "use strict"
+
+        function open_frame(event) {
+            if (option_check.checked) {
+                // Если открыть в новом окне.
+                window.open(adress_field.value);
+            } else {
+                // Если открыть в этом окне.
+                my_frame.src = adress_field.value;
+            }
+        }
+
+        function move_vzad() {
+            history.back();
+            console.log('ВЗАД');
+        }
+
+        function move_nazad() {
+            history.forward();
+            console.log('НАЗАД');
+        }
+    </script>
+</body>
+
+</html>

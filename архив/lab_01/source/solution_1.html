@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		div {
+			width: 30px;
+			height: 30px;
+			background-color: gray;
+			border: 2px solid black;
+		}
+	</style>
+</head>
+
+<body>
+	<table>
+		<tr>
+			<td>
+				<div id='one' onclick="select(this.id)"></div>
+			</td>
+			<td>
+				<div id='two' onclick="select(this.id)"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id='three' onclick="select(this.id)"></div>
+			</td>
+			<td>
+				<div id='four' onclick="select(this.id)"></div>
+			</td>
+		</tr>
+	</table>
+
+	<br>
+
+	<button onclick="select_all()">
+		<p>нажми меня</p>
+	</button>
+
+	<script>
+		let array = [];
+
+		function select(a) {
+			console.log(a);
+			array.push(a);
+		}
+
+		function select_all() {
+			let div_array = [];
+
+			array.forEach(element => {
+				div_array.push(document.getElementById(element));
+			});
+			
+			console.log(array);
+			console.log(unique(div_array));
+		}
+
+		// Функция чтобы лишние элементы выкинуть.
+		function unique(arr) {
+			let result = [];
+
+			for (let str of arr) {
+				if (!result.includes(str)) {
+					result.push(str);
+				}
+			}
+
+			return result;
+		}
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Защита 4 Коледа Алексей ИП-32</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    
+    <script>
+        "use strict"
+        //let str = 'abc   ffffff j';
+        let str = prompt();
+        print_string(str);
+        
+        let arr = str.split('');
+        arr.sort();
+        let clearArr = [];
+
+        for (const a of arr) {
+            if (a > ' ')
+                clearArr.push(a);
+        }
+        
+        clearArr = clearArr.filter(onlyUnique)
+    
+        let res = '';
+        
+        for (let i = 0; i < getRandomInt(2, 10); i++) {
+            let word = '';
+            for (let j = 0; j < getRandomInt(1, 5); j++) {
+                let letter = clearArr[getRandomInt(0, clearArr.length)];
+                word = word.concat(letter);
+            }
+            res = res.concat(word + ' ');
+        }
+        
+        print_string(res);
+
+        function getRandomInt(min = 0, max) {
+            return Math.floor(min + Math.random() * max);
+        }
+
+        function onlyUnique(value, index, self) {
+           return self.indexOf(value) === index;
+        }
+
+        function print_string(str = '---') {
+            document.write("<p>");
+            document.write(str);
+            document.write("</p>");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>Задание 8.3 Коледа ИП-32</title>
+  <style>
+    #line_box {
+      width: 500px;
+      height: 250px;
+      border: 2px dashed black;
+    }
+
+    #line {
+      width: 300px;
+      height: 25px;
+      background-color: #ff0000;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='line_box'>
+    <div id='line'></div>
+  </div>
+
+  <form onsubmit="update_style(event)">
+    <div class="form_part">
+      <p>Выравнивание</p>
+      <input type="radio" value="left" name='margin_select' id='margin_left' checked>
+      <label for='margin_left'>LEFT</label>
+      <br>
+      <input type="radio" value="center" name='margin_select' id='margin_center'>
+      <label for='margin_center'>CENTER</label>
+      <br>
+      <input type="radio" value="right" name='margin_select' id='margin_right'>
+      <label for='margin_right'>RIGHT</label>
+    </div>
+
+    <div class="form_part">
+      <p>Высота</p>
+      <input type="number" id='input_height' max="">
+      <label for='input_height'>Толщина (px)</label>
+    </div>
+
+    <div class="form_part">
+      <p>Ширина</p>
+      <input type="number" id='input_width'>
+      <label for='input_width'>Ширина (px)</label>
+    </div>
+
+    <div class="form_part">
+      <p>Цвет</p>
+      <input type="color" id='input_color' value="#ff0000">
+      <label for='input_color'>Цвет</label>
+    </div>
+
+    <input type="submit" value="Обновить">
+  </form>
+
+  <script>
+    "use strict"
+
+    // Начальные рассчитанные значения до изменений.
+    let line_box_width = parseFloat(window.getComputedStyle(line_box).width);
+    let line_box_height = parseFloat(window.getComputedStyle(line_box).height);
+    let line_width = parseFloat(window.getComputedStyle(line).width);
+    let line_height = parseFloat(window.getComputedStyle(line).height);
+
+    // Установка максимальных значений высоты и ширины для формы ввода.
+    input_height.max = line_box_height;
+    input_width.max = line_box_width;
+
+    // Установка актуальных значений высоты и ширины для формы ввода.
+    input_height.value = line_height;
+    input_width.value = line_width;
+
+    function update_style(event) {
+      // Применение введённых значений ширины и высоты.
+      line.style.height = parseInt(input_height.value) + 'px';
+      line.style.width = parseInt(input_width.value) + 'px';
+
+      line_width = parseFloat(window.getComputedStyle(line).width);
+      line_height = parseFloat(window.getComputedStyle(line).height);
+
+      console.log(line_width);
+      console.log(line_height);
+
+      event.preventDefault();
+
+      // Установка выравнивания.
+      let margins = document.getElementsByName('margin_select');
+      for (const m of margins) {
+        if (m.checked) {
+          //console.log(m.value);
+          if (m.value == 'left') {
+            line.style.marginLeft = '0px';
+            line.style.marginRight = (line_box_width - line_width) + 'px';
+          } else if (m.value == 'right') {
+            line.style.marginRight = '0px';
+            line.style.marginLeft = (line_box_width - line_width) + 'px';
+          } else if (m.value == 'center') {
+            line.style.marginRight = (line_box_width - line_width) / 2 + 'px';
+            line.style.marginLeft = (line_box_width - line_width) / 2 + 'px';
+          }
+          break;
+        }
+      }
+
+      // Применения введёного цвета.
+      line.style.backgroundColor = input_color.value;
+    }
+  </script>
+</body>
+
+</html>

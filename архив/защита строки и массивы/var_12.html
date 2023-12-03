@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Защита 12 Коледа Алексей ИП-32</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    
+    <script>
+        "use strict"
+        let str = 'REMUS Rom rim play';
+        //let str = prompt();
+        print_string(str);
+        
+        let small = 0;
+        let big = 0;
+
+        for (let i = 0; i < str.length; i++) {
+            let code = str.charCodeAt(i);
+            if (code >= 65 && code < 90)
+                big++;
+            if (code >= 97 && code < 122)
+                small++;
+        }
+        
+        print_string('Прописные: ' + big);
+        print_string('Строчные: ' + small);
+
+        function print_string(str = '---') {
+            document.write("<p>");
+            document.write(str);
+            document.write("</p>");
+        }
+    </script>
+</body>
+
+</html> 

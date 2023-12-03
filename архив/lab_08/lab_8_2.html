@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>Задание 8.2 Коледа ИП-32</title>
+  <style>
+    .prompt {
+      color: red;
+      display: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    div {
+      width: 90%;
+      padding: 5px;
+      margin: 10px;
+    }
+
+    .form_part label,
+    input,
+    p {
+      display: inline;
+    }
+  </style>
+</head>
+
+<body>
+  <form onsubmit='send_data(event)'>
+    <div class='form_part'>
+      <label for='input_passportSeries'>Серия паспорта</label>
+      <input type='text' id='input_passportSeries'>
+      <p id='alert_passportSeries' class="prompt">Введите серию паспорта</p>
+    </div>
+
+    <div class='form_part'>
+      <label for='input_passportNumber'>Номер паспорта</label>
+      <input type='text' id='input_passportNumber'>
+      <p id='alert_passportNumber' class="prompt">Введите номер паспорта</p>
+    </div>
+
+    <div class='form_part'>
+      <label for='input_blankNumber'>Номер бланка</label>
+      <input type='text' id='input_blankNumber'>
+      <p id='alert_blankNumber' class="prompt">Введите номер паспорта</p>
+    </div>
+
+    <div class='form_part'>
+      <label for='input_subject'>Предмет</label>
+      <select id='input_subject'>
+        <option>Белорусский</option>
+        <option>Русский</option>
+        <option>Математика</option>
+        <option>Физика</option>
+        <option value='' selected disabled hidden>Выберите предмет</option>
+      </select>
+      <p id='alert_subject' class="prompt">Выберите предмет</p>
+    </div>
+
+    <div class='form_part'>
+      <img src="image.png"><br>
+      <label for='input_imageCode'>Код на картинке</label>
+      <input type='text' id='input_imageCode'>
+      <p id='alert_imageCode' class="prompt">Введите код</p>
+    </div>
+
+    <button id="submit_button" tabindex='1'>Найти</button>
+  </form>
+
+  <script>
+    "use strict"
+
+    function send_data(event) {
+      // Предотвращает перезагрузку страницы.
+      event.preventDefault();
+
+      let passportSeries = check_passportSeries();
+      let passportNumber = check_passportNumber();
+      let blankNumber = check_blankNumber();
+      let subject = check_subject();
+      let imageCode = check_imageCode();
+
+      if (passportSeries && passportNumber && blankNumber && subject && imageCode) {
+        alert('успешно');
+      } else {
+        alert('AHTUNG');
+      }
+
+    }
+
+    // Функция проверяет первое поле формы и скрывает или отображает предупреждение.
+    function check_passportSeries() {
+      let str = input_passportSeries.value;
+
+      if (str.length == 2) {
+        let reg = new RegExp('[a-zA-Z][a-zA-Z]');
+        if (reg.test(str)) {
+          alert_passportSeries.style.display = 'none';
+          return true;
+        } else {
+          alert_passportSeries.style.display = 'initial';
+          return false;
+        }
+      } else {
+        alert_passportSeries.style.display = 'initial';
+        return false;
+      }
+    }
+
+    function check_passportNumber() {
+      let str = input_passportNumber.value;
+
+      if (str.length == 7) {
+        let reg = new RegExp('[0-9]{7}');
+        if (reg.test(str)) {
+          alert_passportNumber.style.display = 'none';
+          return true;
+        } else {
+          alert_passportNumber.style.display = 'initial';
+          return false;
+        }
+      } else {
+        alert_passportNumber.style.display = 'initial';
+        return false;
+      }
+    }
+
+    function check_blankNumber() {
+      let str = input_blankNumber.value;
+
+      if (str.length == 7) {
+        let reg = new RegExp('[0-9]{7}');
+        if (reg.test(str)) {
+          alert_blankNumber.style.display = 'none';
+          return true;
+        } else {
+          alert_blankNumber.style.display = 'initial';
+          return false;
+        }
+      } else {
+        alert_blankNumber.style.display = 'initial';
+        return false;
+      }
+    }
+
+    function check_subject() {
+      let str = input_subject.value;
+
+      if (str == '') {
+        alert_subject.style.display = 'initial';
+        return false;
+      }
+      else {
+        alert_subject.style.display = 'none';
+        return true;
+      }
+    }
+
+    function check_imageCode() {
+      let str = input_imageCode.value;
+
+      if (str.length == 6) {
+        let reg = new RegExp('[0-9]{6}');
+        if (reg.test(str)) {
+          alert_imageCode.style.display = 'none';
+          return true;
+        } else {
+          alert_imageCode.style.display = 'initial';
+          return false;
+        }
+      } else {
+        alert_imageCode.style.display = 'initial';
+        return false;
+      }
+    }
+  </script>
+</body>
+
+</html>

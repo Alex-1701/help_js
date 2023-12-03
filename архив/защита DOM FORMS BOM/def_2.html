@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <script src="jQuery.js"></script>
+    <title>Защита D-F-B Задание 2 Коледа ИП-32</title>
+    <style>
+        body {
+            background-color: lightgray;
+            font-size: 14pt;
+            font-weight: bolder;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+        }
+        p {
+            font-size: 12pt;
+            font-weight: normal;
+        }
+        a {
+            font-size: 12pt;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="input_form" onsubmit="submitForm(event)">
+        <label for="tag_name_input">Тег:</label>
+        <select id='tag_name_input'></select>
+        <br>
+        <label for="content_input">Содержимое:</label>
+        <input id='content_input' type="text" value="my text"></input>
+        <br>
+        <input type="submit" value="добавить">
+    </form>
+    <br>
+    <br>
+    <script>
+        "use strict"
+        
+        let tag_array = ['p', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7'];
+
+        window.onload = function () {
+            let select = document.getElementById('tag_name_input');
+            console.log(select);
+            for (const tag of tag_array) {
+                let option = document.createElement('option');
+                //option.setAttribute('')
+                console.log(option);
+                option.innerText = (`${tag}`);
+                select.appendChild(option);
+            }
+
+        }
+
+        function submitForm(event) {
+            // Предотвращает перезагрузку страницы.
+            event.preventDefault();
+
+            let tag = document.getElementById('tag_name_input').value;
+            let tag_content = document.getElementById('content_input').value;
+
+            let new_element = document.createElement(tag);
+            new_element.innerText = tag_content;
+
+            console.log(tag);
+            console.log(tag_content);
+            console.log(new_element);
+            if (tag == 'a') {
+                new_element.href = 'https://example.com/';
+            }
+            $('body').append(new_element);
+        }
+
+    </script>
+</body>
+
+</html>

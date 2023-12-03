@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 7.1 Коледа Алексей ИП-32</title>
+  <style>
+    table {
+      border: 1px solid gray;
+      background-color: gray;
+    }
+
+    th {
+      height: 20px;
+      border: 1px solid gray;
+      background-color: rgb(223, 223, 223);
+      padding: 5px;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+    }
+
+    td {
+      height: 20px;
+      border: 1px solid gray;
+      background-color: rgb(255, 255, 255);
+      padding: 5px;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+
+    class HardDrive {
+      constructor(oType, oCapacity, oInterface, oSpeed) {
+        this.type = oType;
+        this.capacity = oCapacity;
+        this.interface = oInterface;
+        this.speed = oSpeed;
+      }
+
+      getType() {
+        return this.type;
+      }
+      setType(oType) {
+        this.type = oType;
+      }
+
+      getCapacity() {
+        return this.capacity;
+      }
+      setCapacity(oCapacity) {
+        this.capacity = oCapacity;
+      }
+
+      getInterface() {
+        return this.interface;
+      }
+      setInterface(oInterface) {
+        this.interface = oInterface;
+      }
+
+      getSpeed() {
+        return this.speed;
+      }
+      setSpeed(oSpeed) {
+        this.speed = oSpeed;
+      }
+
+      getInfo() {
+        return this.type + ' ' + this.capacity + ' ' + this.interface + ' ' + this.speed;
+      }
+    }
+
+    class Kingston extends HardDrive {
+      constructor(oType, oCapacity, oInterface, oSpeed, oReleaseDate, oPrice) {
+        super(oType, oCapacity, oInterface, oSpeed);
+        this.releaseDate = oReleaseDate;
+        this.price = oPrice;
+      }
+
+      getReleaseDate() {
+        return this.releaseDate;
+      }
+      setReleaseDate(oReleaseDate) {
+        this.releaseDate = oReleaseDate;
+      }
+
+      getPrice() {
+        return this.price;
+      }
+      setPrice(oPrice) {
+        this.price = oPrice;
+      }
+
+      getInfo() {
+        return this.type + ' ' + this.capacity + ' ' + this.interface + ' ' + this.speed + ' ' + this.releaseDate + ' ' + this.price;
+      }
+    }
+
+    let arr = [];
+    arr.push(new Kingston('SSD', 512, 'PCI', 0, 2007, 145));
+    arr.push(new Kingston('Flesh', 1000, 'PCI', 0, 2018, 998));
+    arr.push(new Kingston('SSD', 512, 'PCI', 0, 2010, 723));
+    arr.push(new Kingston('HDD', 256, 'M.2', 10000, 2008, 234));
+
+    generateTable(arr);
+
+    function generateTable(array) {
+      let prop_name = ['тип', 'ёмкость', 'интерфейс', 'скорость', 'год релиза', 'цена'];
+      let table = document.createElement("table");
+      let row = document.createElement("tr");
+
+      prop_name.forEach(a => {
+        let cell = document.createElement("th");
+        cell.innerText = a;
+        row.appendChild(cell);
+      });
+
+      table.appendChild(row);
+
+      array.forEach(element => {
+        let row = document.createElement("tr");
+        let properties = Object.entries(element);
+
+        properties.forEach(key => {
+          let cell = document.createElement("td");
+          cell.innerText = key[1];
+          row.appendChild(cell);
+        });
+        table.appendChild(row);
+      });
+      document.body.appendChild(table);
+    }
+  </script>
+</body>
+
+</html>

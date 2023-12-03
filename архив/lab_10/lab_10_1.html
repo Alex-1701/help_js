@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <title>Задание 10.1 Коледа ИП-32</title>
+    <style>
+        table {
+            border: 1px solid gray;
+            background-color: gray;
+        }
+
+        th {
+            height: 20px;
+            border: 1px solid gray;
+            background-color: rgb(223, 223, 223);
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        td {
+            height: 20px;
+            border: 1px solid gray;
+            background-color: rgb(255, 255, 255);
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <script src='class.js'></script>
+    <script>
+        "use strict"
+
+        let arr = [];
+        arr.push(new Kingston('SSD', 512, 'PCI', 0, 2007, 145));
+        arr.push(new Kingston('Flesh', 1000, 'PCI', 0, 2018, 998));
+        arr.push(new Kingston('SSD', 512, 'PCI', 0, 2010, 723));
+        arr.push(new Kingston('HDD', 256, 'M.2', 10000, 2008, 234));
+        let str = JSON.stringify(arr);
+        localStorage.setItem('array', str);
+
+        let prop_name_array = ['тип', 'ёмкость', 'интерфейс', 'скорость', 'год релиза', 'цена'];
+        let property_str = JSON.stringify(prop_name_array);
+        localStorage.setItem('property_array', property_str);    
+
+        createTableFromLocalStorage('array', 'property_array');
+
+        function createTableFromLocalStorage(item_name, property_item_name) {
+
+            let array = JSON.parse(localStorage.getItem(item_name));
+            let prop_name = JSON.parse(localStorage.getItem(property_item_name));
+
+            $('body').append('<table></table>');
+            $('table').append(`<tr></tr>`);
+
+            for (const name of prop_name) {
+                $('tr:last').append(`<th>${name}</th>`);
+            }
+
+            for (const obj of array) {
+                $('table').append(`<tr></tr>`);
+
+                for (const prop in obj) {
+                    if (Object.hasOwnProperty.call(obj, prop)) {
+                        const element = obj[prop];
+                        $('tr:last').append(`<td>${element}</td>`);
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

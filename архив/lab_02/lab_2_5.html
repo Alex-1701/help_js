@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 2.5</title>
+  <style>
+    * {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 15pt;
+    }
+  </style>
+</head>
+
+<body>
+  <p id="result"></p>
+  <p id="iterations"></p>
+  <p id="epsilon"></p>
+
+  <script>
+    let x = 1;
+    let eps = 0.0001;
+    let sum_prev = 0
+    let sum_next = x;
+    let n = 0;
+
+    do {
+      n++;
+      sum_prev += sum_next;
+      sum_next = (-1) ** n * x ** (n + 1) / (n + 1);
+      console.log("n: " + n + ";  sum: " + sum_prev.toFixed(8));
+    } while (Math.abs(sum_next) > eps)
+
+    console.log("n: " + n + ";  sum: " + sum_prev.toFixed(8));
+    console.log("%cFinished!", "color:green;");
+
+    sum_prev += sum_next;
+    document.getElementById("result").innerText = "Результат: " + sum_prev.toFixed(4);
+    document.getElementById("iterations").innerText = "Итерации: " + n;
+    document.getElementById("epsilon").innerText = "Точность: " + eps;
+  </script>
+</body>
+
+</html>

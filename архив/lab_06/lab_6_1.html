@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 6.1 Коледа Алексей ИП-32</title>
+</head>
+
+<body>
+
+  <script>
+    "use strict"
+    let hardDrive = {
+      type: 'SSD',
+      capacity: 125,
+      interface: 'PCI',
+      speed: 10000,
+
+      info: function () {
+        let str = '<p>' + this.type + '</p>';
+        str += '<p>' + this.capacity + '</p>';
+        str += '<p>' + this.interface + '</p>';
+        str += '<p>' + this.speed + '</p>';
+        return str;
+      }
+    }
+
+    document.write(hardDrive.info());
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <title>lab 2.3</title>
+</head>
+
+<body style="width: 700px; margin: 20px 20px 20px 20px; font-family: Arial, Helvetica, sans-serif;">
+
+  <p>В соответствии со своим вариантом необходимо написать Java-скрипт (lab2-3.html) для вычисления значения функции
+    y.</p>
+  <p>В выводимом файле предусмотреть форматирование документа, вывод текста задания на лабораторную работу, включая
+    рисунок исходной функции, и вывод информации о разработчике скрипта.</p>
+  <p>Рисунок исходной функции:</p>
+  <img src="shot.png" style="border: 1px solid #ddd; border-radius: 3px; padding: 3px; width: 650px;">
+  <p>Результат: </p>
+  <div>
+    <div style="display:inline-block; text-align: right">
+      <p style="margin:0px">y = </p>
+    </div>
+    <div style="display:inline-block; text-align: left">
+      <p id="result" style="margin:0px"></p>
+    </div>
+  </div>
+  <p id="about"></p>
+  <script>
+    let x = parseFloat(prompt("Введите аргумент x:"));
+    let y = 0;
+
+    if (x > 5 && x != 20)
+      y = x ** 3;
+    else if (-5 <= x && x <= 5)
+      y = x ** 2;
+    else
+      y = Math.log10(x);
+
+    let result = document.getElementById("result");
+    result.innerText = y;
+
+    let about = document.getElementById("about");
+    about.innerHTML = "Разработчик Коледа Алексей из ИП-32. " + "<a href='https://alex-1701.github.io/' target='_blank'>Визитка</a>"
+  </script>
+</body>
+
+</html>
