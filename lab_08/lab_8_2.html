@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задание 8.2</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      .prompt {
+          color: red;
+          display: none;
+      }
+
+      div {
+          width: 90%;
+          padding: 5px;
+          margin: 10px;
+      }
+
+      .form_part label,
+      input,
+      p {
+          display: inline;
+      }
+  </style>
+</head>
+
+<body>
+<form onsubmit='send_data(event)'>
+  <div class='form_part'>
+    <label for='input_passportSeries'>Серия паспорта</label>
+    <input type='text' id='input_passportSeries'>
+    <p id='alert_passportSeries' class="prompt">Введите серию паспорта</p>
+  </div>
+
+  <div class='form_part'>
+    <label for='input_passportNumber'>Номер паспорта</label>
+    <input type='text' id='input_passportNumber'>
+    <p id='alert_passportNumber' class="prompt">Введите номер паспорта</p>
+  </div>
+
+  <div class='form_part'>
+    <label for='input_blankNumber'>Номер бланка</label>
+    <input type='text' id='input_blankNumber'>
+    <p id='alert_blankNumber' class="prompt">Введите номер паспорта</p>
+  </div>
+
+  <div class='form_part'>
+    <label for='input_subject'>Предмет</label>
+    <select id='input_subject'>
+      <option>Белорусский</option>
+      <option>Русский</option>
+      <option>Математика</option>
+      <option>Физика</option>
+      <option value='' selected disabled hidden>Выберите предмет</option>
+    </select>
+    <p id='alert_subject' class="prompt">Выберите предмет</p>
+  </div>
+
+  <div class='form_part'>
+    <img src="image.png"><br>
+    <label for='input_imageCode'>Код на картинке</label>
+    <input type='text' id='input_imageCode'>
+    <p id='alert_imageCode' class="prompt">Введите код</p>
+  </div>
+
+  <button id="submit_button" tabindex='1'>Найти</button>
+</form>
+
+<script>
+    "use strict"
+
+    function send_data(event) {
+        // Предотвращает перезагрузку страницы.
+        event.preventDefault();
+
+        let passportSeries = check_passportSeries();
+        let passportNumber = check_passportNumber();
+        let blankNumber = check_blankNumber();
+        let subject = check_subject();
+        let imageCode = check_imageCode();
+
+        if (passportSeries && passportNumber && blankNumber && subject && imageCode) {
+            alert('успешно');
+        } else {
+            alert('AHTUNG');
+        }
+
+    }
+
+    // Функция проверяет первое поле формы и скрывает или отображает предупреждение.
+    function check_passportSeries() {
+        let str = document.getElementById("input_passportSeries").value;
+
+        const alert = document.getElementById("alert_passportSeries");
+
+        if (str.length === 2) {
+            let reg = new RegExp('[a-zA-Z][a-zA-Z]');
+            if (reg.test(str)) {
+                alertOff(alert);
+                return true;
+            } else {
+                alertOn(alert);
+                return false;
+            }
+        } else {
+            alertOn(alert);
+            return false;
+        }
+    }
+
+    function check_passportNumber() {
+        let str = document.getElementById("input_passportNumber").value;
+
+        const alert = document.getElementById("alert_passportNumber")
+
+        if (str.length === 7) {
+            let reg = new RegExp('[0-9]{7}');
+            if (reg.test(str)) {
+                alertOff(alert);
+                return true;
+            } else {
+                alertOn(alert);
+                return false;
+            }
+        } else {
+            alertOn(alert);
+            return false;
+        }
+    }
+
+    function check_blankNumber() {
+        let str = document.getElementById("input_blankNumber").value;
+
+        const alert = document.getElementById("alert_blankNumber")
+
+        if (str.length === 7) {
+            let reg = new RegExp('[0-9]{7}');
+            if (reg.test(str)) {
+                alertOff(alert);
+                return true;
+            } else {
+                alertOn(alert);
+                return false;
+            }
+        } else {
+            alertOn(alert);
+            return false;
+        }
+    }
+
+    function check_subject() {
+        let str = document.getElementById("input_subject").value;
+
+        const alert = document.getElementById("alert_subject");
+
+        if (str === '') {
+            alertOn(alert);
+            return false;
+        } else {
+            alertOff(alert);
+            return true;
+        }
+    }
+
+    function check_imageCode() {
+        let str = document.getElementById("input_imageCode").value;
+
+        const alert = document.getElementById("alert_imageCode");
+
+        if (str.length === 6) {
+            let reg = new RegExp('[0-9]{6}');
+            if (reg.test(str)) {
+                alertOff(alert);
+                return true;
+            } else {
+                alertOn(alert);
+                return false;
+            }
+        } else {
+            alertOn(alert);
+            return false;
+        }
+    }
+
+    function alertOff(element) {
+        element.style.display = 'none';
+    }
+
+    function alertOn(element) {
+        element.style.display = 'initial';
+    }
+</script>
+</body>
+
+</html>
