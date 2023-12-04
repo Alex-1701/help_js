@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задание 9.3</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      html {
+          height: 100%;
+      }
+
+      body {
+          margin: 0;
+          border: 2px solid grey;
+          height: 100%;
+          width: 100%;
+          overflow: hidden;
+      }
+
+      #field {
+          height: 100%;
+          width: 100%;
+          background-color: greenyellow;
+          padding: 0;
+          margin: 0;
+
+          background-image: url("Football field.svg");
+          background-size: 100%;
+      }
+
+
+      #border_box {
+          border: 3px dashed grey;
+          position: fixed;
+          top: 50px;
+          bottom: 50px;
+          right: 50px;
+          left: 50px;
+      }
+
+      #ball {
+          position: absolute;
+          border-radius: 50%;
+          top: calc(50% + 50px);
+          left: calc(50% - 50px);
+          width: 100px;
+          height: 100px;
+          transform: translate(0.1px, 0.1px);
+          transition: all 0.75s ease-in-out;
+      }
+
+      #ball img {
+          height: 100%;
+      }
+  </style>
+</head>
+
+<body>
+
+<div id='field' onclick="move_ball(event)">
+  <div id='ball'>
+    <img src="ball.svg">
+  </div>
+
+  <div id='border_box' hidden></div>
+</div>
+
+<script>
+    "use strict"
+
+    function move_ball(event) {
+        let field_width = parseFloat(window.getComputedStyle(field).width);
+        let field_height = parseFloat(window.getComputedStyle(field).height);
+
+        let destination_x = event.clientX;
+        let destination_y = event.clientY;
+
+        if (event.clientX < 50) {
+            destination_x = 50;
+        } else if (event.clientX > field_width - 100) {
+            destination_x = field_width - 50;
+        }
+
+        if (event.clientY < 50) {
+            destination_y = 50;
+        } else if (event.clientY > field_height - 100) {
+            destination_y = field_height - 50;
+        }
+
+        ball.style.left = (destination_x - 50) + 'px';
+        ball.style.top = (destination_y - 50) + 'px';
+    }
+</script>
+</body>
+
+</html>

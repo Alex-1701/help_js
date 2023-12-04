@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задание 9.2</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      #button_box {
+          position: absolute;
+          margin-left: 0;
+          margin-top: 0;
+          width: fit-content;
+          padding: 5px;
+      }
+  </style>
+</head>
+
+<body>
+<div id='button_box' onmouseover="Sebastian()">
+  <button id='tricky_button' onclick="alert('ДА КАК ТЫ СМОГ??? 0_o')">Нажми меня <i>чётко</i></button>
+</div>
+
+<script>
+    "use strict"
+
+    let body = document.body;
+    let html = document.documentElement;
+
+    let text_array = ['неуловимый Джо', '<b>LOL</b>', '🤣😆🤣', 'пробуй <i>чётче</i>', 'JS 💙 HTML'];
+
+    function Sebastian() {
+
+        let body_height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        let body_width = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
+
+        let button_box_height = parseFloat(window.getComputedStyle(button_box).height);
+        let button_box_width = parseFloat(window.getComputedStyle(button_box).width);
+
+        button_box.setAttribute('hidden', 'true');
+
+        button_box.style.marginLeft = randomInteger(0, body_width - button_box_width - 20) + 'px';
+        button_box.style.marginTop = randomInteger(0, body_height - button_box_height - 20) + 'px';
+
+        tricky_button.innerHTML = text_array[randomInteger(0, text_array.length - 1)];
+
+        setTimeout(Viuti_iz_symraka, 3000);
+    }
+
+    function Viuti_iz_symraka() {
+        button_box.removeAttribute('hidden');
+    }
+
+    function randomInteger(min, max) {
+        let rand = min - 0.5 + Math.random() * (max - min + 1);
+        return Math.round(rand);
+    }
+</script>
+</body>
+
+</html>

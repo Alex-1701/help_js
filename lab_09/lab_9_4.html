@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задание 9.4</title>
+  <style>
+      html {
+          height: 100%;
+      }
+
+      body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+      }
+
+      #radius {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+      }
+
+      #ufo {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          background-color: transparent;
+          border-radius: 50%;
+
+          background-image: url("smile.webp");
+      }
+  </style>
+</head>
+
+<body onmousemove="mouse_move(event)">
+
+<div id='ufo'></div>
+<div id='radius'></div>
+
+<script>
+    "use strict"
+
+    let center_x = 0;
+    let center_y = 0;
+    let angle = 0
+    const radius_len = 100;
+
+    setInterval(() => {
+        angle += 0.05
+        let offset_x = radius_len * Math.sin(angle);
+        let offset_y = radius_len * Math.cos(angle);
+        ufo.style.left = (center_x - 25 + offset_x) + 'px';
+        ufo.style.top = (center_y - 25 + offset_y) + 'px';
+    }, 10);
+
+    function mouse_move(event) {
+        center_x = event.clientX;
+        center_y = event.clientY;
+        radius.style.left = (center_x - 25) + 'px';
+        radius.style.top = (center_y - 25) + 'px';
+    }
+</script>
+</body>
+
+</html>

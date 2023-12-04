@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Задание 9.1</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      html {
+          height: 100%;
+      }
+
+      body {
+          height: 100%;
+          margin: 0;
+      }
+
+      iframe {
+          border: 2px dashed black;
+          height: calc(100% - 27px);
+          width: calc(100% - 4px);
+      }
+  </style>
+</head>
+
+<body>
+
+<form>
+  <button type="button" onclick="move_vzad()"><-- Взад</button>
+  <button type="button" onclick="move_vpered()">Вперёд --></button>
+  <input id='adress_field' type="text" value="https://example.com/" list="autofill">
+  <datalist id="autofill">
+    <option value="https://example.com/">
+    <option value="https://www.gstu.by/">
+    <option value="https://earth.nullschool.net/ru/#current/wind/surface/level/overlay=temp/orthographic=30.96,52.46,990/loc=30.958,52.459">
+    <option value="https://naked-science.ru/">
+  </datalist>
+
+  <button type="button" onclick="open_frame()">Открыть</button>
+  <input id='option_check' type="checkbox" value="kek">
+  <label for='option_check'>в новом окне</label>
+</form>
+<iframe id='my_frame'></iframe>
+
+<script>
+    "use strict"
+
+    function open_frame() {
+        if (option_check.checked) {
+            // Если открыть в новом окне.
+            window.open(adress_field.value);
+        } else {
+            // Если открыть в этом окне.
+            my_frame.src = adress_field.value;
+        }
+    }
+
+    function move_vzad() {
+        history.back();
+        console.log('ВЗАД');
+    }
+
+    function move_vpered() {
+        history.forward();
+        console.log('ВПЕРЁД');
+    }
+</script>
+</body>
+
+</html>
