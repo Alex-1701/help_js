@@ -7,22 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>lab 5.2 Бородина Наталья ИП-32</title>
   <style>
-    * {
-      font-family: 'Courier New', Courier, monospace;
-    }
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
   </style>
 </head>
 
 <body>
 
-  <script>
+<script>
     "use strict"
     let string = 'О сколько нам открытий чудных Готовят просвещенья дух И опыт сын ошибок трудных И гений парадоксов друг И случай бог изобретатель'
     document.writeln('<p>' + string + '</p>');
-
-    // Выделение всех слов.
-    let countAllWordsReg = RegExp('[а-яА-Я]+([^а-яА-Я])', 'g');
-    let countAllWords = string.match(countAllWordsReg);
 
     // Выделение слов содежащих букву 'п'.
     let countSpecialWordsReg = RegExp('[а-яА-Я]*[п][а-яА-Я]*', 'g');
@@ -34,7 +30,7 @@
 
     document.writeln('<p>' + resStr + '</p>');
     document.writeln('<p>' + "Количество слов с 'п': " + (countSpecialWords.length) + '</p>');
-  </script>
+</script>
 </body>
 
 </html>

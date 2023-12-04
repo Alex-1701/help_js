@@ -80,7 +80,7 @@
         const y = parseFloat(document.getElementById('y').value);
         const z = parseFloat(document.getElementById('z').value);
 
-        result = calculateB(x, y, z);
+        const result = calculateB(x, y, z);
 
         document.getElementById('result').innerHTML = "Значение функции b:" + result.toFixed(2);
     }
