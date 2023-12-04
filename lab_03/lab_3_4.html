@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 3.4 Бородина Наталья ИП-32</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      body {
+          display: flex;
+          flex-direction: column;
+          row-gap: 10px;
+      }
+  </style>
+</head>
+
+<body>
+
+<span>
+  <label for="task_2_b">Task_2 = </label>
+  <input id="task_2_b">
+</span>
+
+<span>
+  <label for="task_2_b_carried">Task_2_carried = </label>
+  <input id="task_2_b_carried">
+</span>
+
+<span>
+  <label for="task_3_b">Task_3 = </label>
+  <input id="task_3_b">
+</span>
+
+<span>
+  <label for="task_3_b_carried">Task_3_carried = </label>
+  <input id="task_3_b_carried">
+</span>
+
+<script>
+    "use strict";
+
+    const curry = (fun) => {
+        return function (a) {
+            return function (b) {
+                return function (c) {
+                    return fun(a, b, c);
+                }
+            };
+        };
+    }
+
+    const calculateB_from_task2 = (x, y, z) => {
+        return (1 + Math.cos(x + z) * Math.cos(x + z)) / (Math.abs(Math.pow(x, 3)) - 2 * Math.pow(y, 2));
+    }
+    const carried_calculateB_from_task2 = curry(calculateB_from_task2);
+    document.getElementById("task_2_b").value = calculateB_from_task2(1, 2, 3).toFixed(5);
+    document.getElementById("task_2_b_carried").value = carried_calculateB_from_task2(1)(2)(3).toFixed(5);
+
+
+    const calculateB_from_task3 = (x, y, z) => {
+        const numerator = Math.pow(1 + Math.cos(x + z), 2);
+        const denominator = Math.abs(Math.pow(x, 3) - 2 * Math.pow(y, 2));
+        return numerator / denominator;
+    }
+    const carried_calculateB_from_task3 = curry(calculateB_from_task3);
+    document.getElementById("task_3_b").value = calculateB_from_task3(1, 2, 3).toFixed(5);
+    document.getElementById("task_3_b_carried").value = carried_calculateB_from_task3(1)(2)(3).toFixed(5);
+
+</script>
+</body>
+
+</html>

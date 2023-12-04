@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 3.2 Бородина Наталья ИП-32</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      h1 {
+          text-align: center;
+      }
+
+      #expression {
+          text-align: center;
+          font-size: 24px;
+          margin-bottom: 20px;
+      }
+
+      #result {
+          text-align: center;
+          font-size: 18px;
+      }
+
+      #developer-info {
+          text-align: center;
+          margin-top: 50px;
+      }
+  </style>
+</head>
+<body>
+<h1>Домашнее задание</h1>
+<div id="expression">
+  <img src="expression1.png" alt="Исходное выражение">
+  <img src="expression2.png" alt="Исходное выражение 2">
+  <img src="expression3.png" alt="Исходное выражение 3">
+</div>
+
+<script>
+    "use strict"
+
+    const calculateArea = (r) => {
+        return Math.PI * Math.pow(r, 2);
+    }
+
+    const calculateCircumference = (r) => {
+        return 2 * Math.PI * r;
+    }
+
+    const calculateB = (x, y, z) => {
+        return (1 + Math.cos(x + z) * Math.cos(x + z)) / (Math.abs(Math.pow(x, 3)) - 2 * Math.pow(y, 2));
+    }
+
+    let r = parseInt(prompt("Введите значение радиуса r:"));
+
+    let area = calculateArea(r);
+    let circumference = calculateCircumference(r);
+
+    document.write("<div id='result'>");
+    document.write("Площадь круга: " + area.toFixed(2) + "<br>");
+    document.write("Длина окружности: " + circumference.toFixed(2));
+    document.write("</div>");
+
+    let x = parseInt(prompt("Введите x:"));
+    let y = parseInt(prompt("Введите у:"));
+    let z = parseInt(prompt("Введите z:"));
+
+    let b = calculateB(x, y, z);
+
+    document.write("<div id='result'>");
+    document.write("Значение: " + b.toFixed(2) + "<br>");
+    document.write("</div>");
+
+    document.write("<div id='developer-info'>");
+    document.write("Разработано с помощью JavaScript <br>");
+    document.write("Автор - Бородина Наталья");
+    document.write("</div>");
+
+
+</script>
+</body>
+</html>

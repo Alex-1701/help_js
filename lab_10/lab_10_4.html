@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <title>lab 10.4 Бородина Наталья ИП-32</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      body {
+          background-color: lightgray;
+          font-size: 12pt;
+          padding: 10px;
+      }
+
+      div {
+          padding: 0;
+          margin: 0;
+      }
+
+      table {
+          border: 1px solid grey;
+          background-color: grey;
+      }
+
+      th {
+          height: 20px;
+          width: 20px;
+          border: 3px solid grey;
+          background-color: rgb(223, 223, 223);
+          padding: 5px;
+          font-weight: bold;
+      }
+
+      td {
+          height: 20px;
+          border: 3px solid grey;
+          background-color: rgb(184, 184, 184);
+          color: rgba(0, 0, 0, 0.5);
+          padding: 5px;
+          font-weight: bold;
+          text-align: end;
+      }
+
+      .active {
+          background-color: rgb(255, 255, 255);
+          color: rgba(0, 0, 0, 1);
+      }
+
+      .current {
+          color: rgb(255, 0, 0);
+          background-color: #ffd3d3;
+          border: 2px dashed red;
+      }
+
+      input {
+          margin-right: 35px;
+      }
+
+      #modal_window {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+
+          background-color: rgba(128, 128, 128, 0.7);
+      }
+
+      #modal_window_entry {
+          font-weight: 300;
+          font-size: 13pt;
+          color: black;
+          border: 2px solid grey;
+          background-color: white;
+          margin: 100px 100px 100px 100px;
+          padding: 10px 10px 10px 10px;
+
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: center;
+          align-items: center;
+      }
+
+      #events_description_box {
+          padding: 10px;
+      }
+
+      #input_form {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .form_part {
+          margin: 10px;
+      }
+
+      #form_bottom {
+          width: 40%;
+          margin-top: 10px;
+      }
+
+      #submit_button_box input {
+          float: none;
+      }
+
+      #submit_button_box {
+          text-align: center;
+      }
+
+      .button_box {
+          display: inline-block;
+          margin: 0 0;
+      }
+
+      #first_button {
+          float: left;
+      }
+
+      #second_button {
+          float: right;
+      }
+  </style>
+</head>
+
+<body>
+<div id='modal_window' hidden>
+  <div id='modal_window_entry'>
+    <div id='events_description_box'>
+      <h4>Запланированные события на этот день:</h4>
+    </div>
+    <form id='input_form' onsubmit='add_new_event(event)'>
+      <div class='form_part' hidden>
+        <label for='input_date_hidden'>Число мероприятия:</label>
+        <input type='number' id='input_date_hidden' value="0">
+      </div>
+
+      <div class='form_part'>
+        <label for='input_event_name'>Название мероприятия:</label>
+        <input type='text' id='input_event_name' required value="днюха у собаки">
+      </div>
+
+      <div class='form_part'>
+        <label for='input_event_color'>цвет маркера:</label>
+        <input type='color' id='input_event_color' required value="#59c062">
+      </div>
+
+      <div class='form_part' id='submit_button_box'>
+        <input type="submit" value="Добавить">
+      </div>
+    </form>
+
+    <div id='form_bottom'>
+      <div class="button_box" id='first_button'>
+        <button onclick=''>Ищо</button>
+      </div>
+      <div class="button_box" id='second_button'>
+        <button onclick='close_form()'>Харош</button>
+      </div>
+    </div>
+  </div>
+</div>
+<form onsubmit="start(event)">
+  <input id='input_date' type="date" value="2021-10-26" required>
+  <input id='click' type="submit" value="НЕ ЖМИ!!!">
+</form>
+<br>
+<script>
+    "use strict"
+
+    add_info_to_localStorage();
+
+    function add_info_to_localStorage() {
+        if (localStorage.getItem('events') === null) {
+            let event_array = [
+                {date: '2021-10-07', name: 'день защиты кошек', color: 'black'},
+                {date: '2021-10-10', name: 'вернуть сотку Сане', color: 'coral'},
+                {date: '2021-10-30', name: 'годовщина изобретения стола', color: 'blue'},
+                {date: '2021-11-05', name: 'Днюха Императора Александра', color: 'pink'},
+                {date: '2021-10-21', name: 'годовщина похищения инопланетянами', color: 'yellow'},]
+
+            localStorage.setItem('events', JSON.stringify(event_array));
+        }
+    }
+
+    function start(event) {
+        console.log('start');
+        Date.prototype.daysInMonth = function () {
+            return 32 - new Date(this.getFullYear(), this.getMonth(), 32).getDate();
+        };
+
+        event.preventDefault();
+
+        let date = new Date(input_date.value);
+        let start_date = new Date(date.getFullYear(), date.getMonth(), 1);
+        let prev_date = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+
+        let diff = prev_date.daysInMonth() - start_date.getDay() + 1;
+
+        let array = [];
+        let date_start = diff;
+
+        let type = false;
+        let isCurrent = false;
+        for (let i = 0; i < 42; i++) {
+            if (date_start >= prev_date.daysInMonth() + 1 && type === false) {
+                date_start = 1;
+                type = true;
+            } else if (date_start >= date.daysInMonth() + 1 && type === true) {
+                date_start = 1;
+                type = false;
+            }
+            if (date_start === date.getDate() && type === true) {
+                isCurrent = true;
+            }
+            array.push({number: date_start, active: type, current: isCurrent});
+            isCurrent = false;
+            date_start += 1;
+        }
+        if (createTableFromArray(array))
+            modify_table();
+    }
+
+    function createTableFromArray(array) {
+        console.log('create table');
+        let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+
+        // Удаляем старую таблицу если она есть.
+        if ($('table').length > 0) {
+            $('table').remove();
+        }
+
+        $('body').append('<table></table>');
+        $('table').append(`<tr></tr>`);
+
+        for (const name of days) {
+            $('tr:last').append(`<th>${name}</th>`);
+        }
+
+        let count = 0;
+        for (let i = 0; i < 6; i++) {
+            $('table').append(`<tr></tr>`);
+            for (let j = 0; j < 7; j++) {
+                $('tr:last').append(`<td>${array[count].number}</td>`);
+                // День их текущего месяца.
+                if (array[count].active) {
+                    $('td:last').addClass('active');
+                    $('td:last').attr('id', array[count].number);
+                    $('td:last').click(show_form);
+                }
+                if (array[count].current) {
+                    $('td:last').addClass('current');
+                }
+                count++;
+            }
+        }
+
+        return true;
+    }
+
+    function modify_table() {
+        console.log('modify table');
+        let current_month = new Date(input_date.value).getMonth();
+        let event_array = JSON.parse(localStorage.getItem('events'));
+
+        for (let i = 0; i < event_array.length; i++) {
+            let event_date = new Date(event_array[i].date);
+            // Выбираем все события текущего месяца.
+            if (event_date.getMonth() === current_month) {
+                $(`#${event_date.getDate()}`).css('border-color', event_array[i].color);
+            }
+        }
+    }
+
+    function show_form(event) {
+        modal_window.removeAttribute('hidden');
+        let current_date = new Date(input_date.value);
+        let event_array = JSON.parse(localStorage.getItem('events'));
+
+        for (let i = 0; i < event_array.length; i++) {
+            let event_date = new Date(event_array[i].date);
+            // Выбираем все события текущего месяца.
+            if (event_date.getMonth() === current_date.getMonth() && event_date.getDate().toString() === event.target.id) {
+                $('#events_description_box').append(`<p>${event_array[i].name}</p>`);
+                // Добавляем новому элементу класс, чтобы можно было по классу все эти элеенты удалять.
+                $('p:last').addClass('event_description_paragraph');
+            }
+        }
+        // Устанавливает значение числа для того чтобы можно было это число потом считать из формы.
+        $('#input_date_hidden').val(event.target.id);
+    }
+
+    function close_form() {
+        modal_window.setAttribute('hidden', 'true');
+        $('.event_description_paragraph').remove();
+        $('#input_event_name').val('');
+        $('#input_event_color').val('');
+    }
+
+    function add_new_event(event) {
+        event.preventDefault();
+        let current_date = new Date(input_date.value);
+        let event_array = JSON.parse(localStorage.getItem('events'));
+        event_array.push({
+            date: current_date.getFullYear() + '-' + (current_date.getMonth() + 1) + '-' + $('#input_date_hidden').val(),
+            name: $('#input_event_name').val(),
+            color: $('#input_event_color').val()
+        })
+        console.log(event_array);
+        $('#events_description_box').append(`<p>${$('#input_event_name').val()}</p>`);
+        localStorage.setItem('events', JSON.stringify(event_array));
+        modify_table();
+    }
+</script>
+</body>
+
+</html>

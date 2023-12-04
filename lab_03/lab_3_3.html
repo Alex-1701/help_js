@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 3.3 Бородина Наталья ИП-32</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      body {
+          margin: 20px;
+      }
+
+      h1 {
+          text-align: center;
+      }
+
+      #function-image {
+          display: block;
+          margin: 20px auto;
+      }
+
+      form {
+          text-align: center;
+          margin-top: 20px;
+      }
+
+      input[type="number"] {
+          width: 100px;
+          padding: 5px;
+          margin-right: 10px;
+      }
+
+      input[type="submit"] {
+          padding: 5px 10px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          cursor: pointer;
+      }
+
+      #result {
+          text-align: center;
+          margin-top: 20px;
+      }
+
+  </style>
+</head>
+<body>
+<h1>Вычисление значения функции</h1>
+<img id="function-image" src="function_image.png" alt="Исходная функция">
+
+<form onsubmit="calculateFunction(event)">
+  <label for="x">Введите значение x:</label>
+  <input type="number" id="x" required>
+
+  <label for="y">Введите значение y:</label>
+  <input type="number" id="y" required>
+
+  <label for="z">Введите значение z:</label>
+  <input type="number" id="z" required>
+
+  <input type="submit" value="Вычислить">
+</form>
+
+<div id="result"></div>
+
+
+<script>
+    "use strict"
+
+    const calculateFunction = (event) => {
+        event.preventDefault();
+
+        const x = parseFloat(document.getElementById('x').value);
+        const y = parseFloat(document.getElementById('y').value);
+        const z = parseFloat(document.getElementById('z').value);
+
+        result = calculateB(x, y, z);
+
+        document.getElementById('result').innerHTML = "Значение функции b:" + result.toFixed(2);
+    }
+
+    const calculateB = (x, y, z) => {
+        const numerator = Math.pow(1 + Math.cos(x + z), 2);
+        const denominator = Math.abs(Math.pow(x, 3) - 2 * Math.pow(y, 2));
+        return numerator / denominator;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <title>lab 11.2 Бородина Наталья ИП-32</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      body {
+          background-color: lightgray;
+          font-size: 14pt;
+          font-weight: bolder;
+          padding: 10px;
+      }
+
+      table {
+          border: 1px solid grey;
+          background-color: grey;
+          width: 400px;
+      }
+
+      th {
+          height: 20px;
+          width: 20px;
+          border: 3px solid grey;
+          background-color: rgb(223, 223, 223);
+          padding: 5px;
+          font-weight: bold;
+      }
+
+      td {
+          height: 20px;
+          border: 3px solid grey;
+          padding: 5px;
+          font-weight: bold;
+          background-color: rgb(255, 255, 255);
+          color: rgba(0, 0, 0, 1);
+      }
+  </style>
+</head>
+
+<body>
+
+<label for='input_start_time'>Начало:</label>
+<input id='input_start_time' type="date" oninput="redraw_table()" value="2022-10-01">
+<br>
+<br>
+<label for='input_finish_time'>Конец:</label>
+<input id='input_finish_time' type="date" oninput="redraw_table()" value="2023-10-29">
+<br>
+<br>
+
+<script>
+    "use strict"
+
+    // Для данной валюты нет данных
+    // const new_Cur_ID = 466;
+    // Возьмём другую
+    const new_Cur_ID = 426;
+
+    redraw_table();
+
+    function redraw_table() {
+        let start_time = new Date(input_start_time.value)
+        let finish_time = new Date(input_finish_time.value)
+
+        console.log(start_time.getFullYear());
+
+        // Удаляем старую таблицу если она есть.
+        if ($('table').length > 0) {
+            $('table').remove();
+        }
+
+        $('body').append('<table></table>');
+        $('table').append(`<tr></tr>`);
+
+        let cols = ['Дата', 'курс'];
+
+        for (const name of cols) {
+            $('tr:last').append(`<th>${name}</th>`);
+        }
+
+        fetch(`https://www.nbrb.by/API/ExRates/Rates/Dynamics/${new_Cur_ID}?startDate=${input_start_time.value}&endDate=${input_finish_time.value}`)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                for (const key in res) {
+                    $('table').append(`<tr></tr>`);
+                    if (Object.hasOwnProperty.call(res, key)) {
+                        const element = res[key];
+                        console.log(element.Date, element.Cur_OfficialRate);
+                        let temp_date = new Date(element.Date);
+                        $('tr:last').append(`<td>${temp_date.getFullYear()}-${temp_date.getMonth()}-${temp_date.getDate()}</td>`);
+                        $('tr:last').append(`<td>${element.Cur_OfficialRate}</td>`);
+                    }
+                }
+            });
+    }
+</script>
+</body>
+
+</html>

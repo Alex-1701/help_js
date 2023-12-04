@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 3.5 Бородина Наталья ИП-32</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+          font-size: 15pt;
+      }
+  </style>
+</head>
+
+<body>
+<p id="result"></p>
+<p id="iterations"></p>
+<p id="epsilon"></p>
+<p id="resultMath"></p>
+
+<script>
+    let x = 2;
+    let epsilon = 0.0001;
+    let n = 0;
+
+    document.getElementById("resultMath").innerText = "Math: " + Math.log((x + 1) / (x - 1));
+    document.getElementById("iterations").innerText = "Итерации: " + n;
+    document.getElementById("epsilon").innerText = "Точность: " + epsilon;
+    document.getElementById("result").innerText = "Результат: " + recursiveTailor(0, x, epsilon);
+
+    function recursiveTailor(num, arg, eps) {
+        n++;
+        const t = (num + 1) * 2 - 1;
+        const value = 2 / (t * arg ** t);
+
+        if (Math.abs(value) < eps) {
+            // It's time to stop!
+            return value;
+        } else {
+            // YOLO
+            return value + recursiveTailor(num + 1, arg, eps);
+        }
+    }
+</script>
+</body>
+
+</html>

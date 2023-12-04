@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <title>lab 11.1 Бородина Наталья ИП-32</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+
+      body {
+          background-color: lightgray;
+          font-size: 14pt;
+          font-weight: bolder;
+          padding: 10px;
+      }
+  </style>
+</head>
+
+<body>
+<img width="100px" src="flag.svg">
+<h3>Аргентина</h3>
+
+<script>
+    "use strict"
+    const new_Cur_ID = 466;
+
+    fetch(`https://www.nbrb.by/api/exrates/currencies/${new_Cur_ID}`)
+        .then(res => res.json())
+        .then(res => {
+            // console.log(res);
+            $('body').append(`<p>${res.Cur_ID}</p>`);
+            $('body').append(`<p>${res.Cur_Name_Eng}</p>`);
+            $('body').append(`<p>${res.Cur_Name_Bel}</p>`);
+        });
+
+    fetch(`https://www.nbrb.by/api/exrates/rates/${new_Cur_ID}`)
+        .then(res => res.json())
+        .then(res => {
+            // console.log(res);
+            $('body').append(`<p>${res.Cur_OfficialRate}</p>`);
+        });
+</script>
+</body>
+
+</html>
