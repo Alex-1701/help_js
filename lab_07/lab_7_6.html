@@ -7,92 +7,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>lab 7.6</title>
   <style>
-      p {
-          margin: 5px;
-          font-weight: normal;
-          font-family: 'Courier New', Courier, monospace;
-          /*user-select: none;*/
-      }
+    p {
+      margin: 5px;
+      font-weight: normal;
+      font-family: 'Courier New', Courier, monospace;
+      user-select: none;
+    }
   </style>
 </head>
 
 <body>
-<ul>
-  <li>
-    <p>Сомерсет Моэм - Бремя страстей человеческих</p>
-  </li>
-  <li>
-    <p>Жуль Верн - 20 тысяч лье под водой</p>
-  </li>
-  <li>
-    <p>Толкин - Хоббит</p>
-  </li>
-  <li>
-    <p>Владимир Беляев - Прыжок в ничто</p>
-  </li>
-  <li>
-    <p>Стивен Хоккинг - Краткая история времени</p>
-  </li>
-  <li>
-    <p>Анджей Сапковский - Меч предназначения</p>
-  </li>
-  <li>
-    <p>Френк Герберт - Дюна</p>
-  </li>
-  <li>
-    <p>Lorem ipsum - dolor sit amet consectetur</p>
-  </li>
-</ul>
-<script>
+  <ul>
+    <li>
+      <p>Сомерсет Моэм - Бремя страстей человеческих</p>
+    </li>
+    <li>
+      <p>Жуль Верн - 20 тысяч лье под водой</p>
+    </li>
+    <li>
+      <p>Толкин - Хоббит</p>
+    </li>
+    <li>
+      <p>Владимир Беляев - Прыжок в ничто</p>
+    </li>
+    <li>
+      <p>Стивен Хоккинг - Краткая история времени</p>
+    </li>
+    <li>
+      <p>Анджей Сапковский - Меч предназначения</p>
+    </li>
+    <li>
+      <p>Френк Герберт - Дюна</p>
+    </li>
+    <li>
+      <p>Lorem ipsum - dolor sit amet consectetur</p>
+    </li>
+  </ul>
+  <script>
     "use strict"
+    const books = ["Сомерсет Моэм - Бремя страстей человеческих", "Жуль Верн - 20 тысяч лье под водой", "Толкин - Хоббит", "Владимир Беляев - Прыжок в ничто", "Стивен Хоккинг - Краткая история времени", "Анджей Сапковский - Меч предназначения", "Френк Герберт - Дюна", "Lorem ipsum - dolor sit amet consectetur"]
+
     let lis = document.getElementsByTagName('li');
 
     let lastInd = -1;
 
     for (let i = 0; i < lis.length; i++) {
-        const unit = lis[i];
-        unit.number = i;
-        unit.addEventListener('click', action);
+      const unit = lis[i];
+      unit.number = i;
+      unit.addEventListener('click', action);
     }
 
     let prevInd = 0;
 
-    function action() {
-        let unit = event.currentTarget.childNodes[1].style;
-        let unitInd = event.currentTarget.number;
+    // Создать HTML-документ со списком книг (автор и название).
 
-        if (event.shiftKey) {
-            if (lastInd > -1) {
-                let increment = 1;
-                let start = lastInd, finish = unitInd;
+    // При щелчке по элементу спиcка, цвет текста должен меняться на оранжевый. 
+    // При этом, если к какому-то элементу было применено выделение цветом, это выделение должно сбрасываться. 
+    // При повторном щелчке на элементе необходимо возвращать прежний цвет. 
+    // Если при клике мышкой была нажата клавиша Ctrl, то элемент добавляется/удаляется из выделенных.
+    // Если при клике мышкой была нажата клавиша Shift, то к выделению добавляются все элементы в промежутке от предыдущего кликнутого до текущего (как в проводнике Window или любом файловом менеджере).
+    // Для снятия выделения по умолчанию (синий цвет) используйте свойство user-select: none для контейнера списка.
 
-                if (lastInd > unitInd) {
-                    // swap
-                    [start, finish] = [finish, start];
-                }
+    // Ебашим собственный реакт.
 
-                for (let i = start; i <= finish; i++) {
-                    lis[i].childNodes[1].style.fontWeight = 'bold';
-                }
-            }
-        } else if (event.ctrlKey) {
+    function action(event) {
+      let unit = event.currentTarget.childNodes[1].style;
+      let unitInd = event.currentTarget.number;
+      lastInd = unitInd;
 
-            if (unit.fontWeight === 'bold')
-                unit.fontWeight = 'normal';
-            else {
-                unit.fontWeight = 'bold';
-                // запоминаем последнее выделение
-                lastInd = unitInd;
-            }
-        } else {
-            if (unit.color === 'orange')
-                unit.color = 'black';
-            else {
-                unit.color = 'orange';
-            }
+      if (event.shiftKey) {
+        if (lastInd > -1) {
+          let increment = 1;
+          let start = lastInd, finish = unitInd;
+
+          if (lastInd > unitInd) {
+            // swap
+            [start, finish] = [finish, start];
+          }
+
+          for (let i = start; i <= finish; i++) {
+            lis[i].childNodes[1].style.color = 'orange';
+          }
         }
+      } else if (event.ctrlKey) {
+
+        // if (unit.fontWeight === 'bold')
+        //     unit.fontWeight = 'normal';
+        // else {
+        //     unit.fontWeight = 'bold';
+        //     // запоминаем последнее выделение
+        //     // lastInd = unitInd;
+        // }
+      } else {
+        if (unit.color === 'orange')
+          unit.color = 'black';
+        else {
+          unit.color = 'orange';
+        }
+      }
     }
-</script>
+  </script>
 </body>
 
 </html>
