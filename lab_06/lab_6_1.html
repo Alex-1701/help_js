@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 6.1</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+  </style>
+</head>
+
+<body>
+
+<script>
+    "use strict"
+    let processor = {
+        clockSpeed: 1_200_000,  // Тактовая частота в Гц
+        cores: 2,               // Количество ядер
+        capacity: 64,           // Разрядность
+        technicalProcess: 20,   // Техпроцесс в нм
+
+        info: function () {
+            let str = '<p>' + ' Тактовая частота ' + this.clockSpeed + ' Гц' + '</p>';
+            str += '<p>' + 'Количество ядер ' + this.cores + '</p>';
+            str += '<p>' + 'Разрядность ' + this.capacity + '</p>';
+            str += '<p>' + 'Техпроцесс ' + this.technicalProcess + ' нм' + '</p>';
+            return str;
+        }
+    }
+
+    document.write(processor.info());
+</script>
+</body>
+
+</html>

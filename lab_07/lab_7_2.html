@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 7.2</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+  </style>
+</head>
+
+<body>
+<ul>
+  <li><a href="https://example.com/">NASA</a></li>
+  <li><a href="D:/FAVICON.png">иконка</a></li>
+  <li><a href="https://example.com/">WikiPedia</a></li>
+  <li><a href="https://yandex.com/">Yandex</a></li>
+  <li><a href="https://www.google.com/">Google.com</a></li>
+  <li><a href="lab_7_1.html">предыдущая лаба</a></li>
+  <li><a href="../../labs/lab_1">лаба какая-то</a></li>
+  <li><a href="file://">Файловая система (недоступна)</a></li>
+</ul>
+
+<script>
+    "use strict"
+
+    let object = document.getElementsByTagName('a');
+
+    for (const key in object) {
+        if (Object.hasOwnProperty.call(object, key)) {
+            const element = object[key];
+            let begin = element.href.slice(0, 5);
+
+            if (begin === 'http:' || begin === 'https:') {
+                element.style.textDecoration = 'underline';
+                element.style.textDecorationStyle = 'dotted';
+                element.style.color = 'black';
+            } else if (begin === 'file:') {
+                element.style.textDecoration = 'none';
+                element.style.fontFamily = "'Courier New', Courier, monospace";
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

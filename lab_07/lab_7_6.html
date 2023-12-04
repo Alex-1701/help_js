@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 7.6</title>
+  <style>
+      p {
+          margin: 5px;
+          font-weight: normal;
+          font-family: 'Courier New', Courier, monospace;
+          /*user-select: none;*/
+      }
+  </style>
+</head>
+
+<body>
+<ul>
+  <li>
+    <p>Сомерсет Моэм - Бремя страстей человеческих</p>
+  </li>
+  <li>
+    <p>Жуль Верн - 20 тысяч лье под водой</p>
+  </li>
+  <li>
+    <p>Толкин - Хоббит</p>
+  </li>
+  <li>
+    <p>Владимир Беляев - Прыжок в ничто</p>
+  </li>
+  <li>
+    <p>Стивен Хоккинг - Краткая история времени</p>
+  </li>
+  <li>
+    <p>Анджей Сапковский - Меч предназначения</p>
+  </li>
+  <li>
+    <p>Френк Герберт - Дюна</p>
+  </li>
+  <li>
+    <p>Lorem ipsum - dolor sit amet consectetur</p>
+  </li>
+</ul>
+<script>
+    "use strict"
+    let lis = document.getElementsByTagName('li');
+
+    let lastInd = -1;
+
+    for (let i = 0; i < lis.length; i++) {
+        const unit = lis[i];
+        unit.number = i;
+        unit.addEventListener('click', action);
+    }
+
+    let prevInd = 0;
+
+    function action() {
+        let unit = event.currentTarget.childNodes[1].style;
+        let unitInd = event.currentTarget.number;
+
+        if (event.shiftKey) {
+            if (lastInd > -1) {
+                let increment = 1;
+                let start = lastInd, finish = unitInd;
+
+                if (lastInd > unitInd) {
+                    // swap
+                    [start, finish] = [finish, start];
+                }
+
+                for (let i = start; i <= finish; i++) {
+                    lis[i].childNodes[1].style.fontWeight = 'bold';
+                }
+            }
+        } else if (event.ctrlKey) {
+
+            if (unit.fontWeight === 'bold')
+                unit.fontWeight = 'normal';
+            else {
+                unit.fontWeight = 'bold';
+                // запоминаем последнее выделение
+                lastInd = unitInd;
+            }
+        } else {
+            if (unit.color === 'orange')
+                unit.color = 'black';
+            else {
+                unit.color = 'orange';
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

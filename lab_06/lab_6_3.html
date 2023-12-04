@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 6.3</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+  </style>
+</head>
+
+<body>
+
+<script>
+    "use strict"
+
+    class Processor {
+        constructor(clockSpeed, cores, capacity, technicalProcess) {
+            this._clockSpeed = clockSpeed;
+            this._cores = cores;
+            this._capacity = capacity;
+            this._technicalProcess = technicalProcess;
+        }
+
+        set clockSpeed(value) {
+            this._clockSpeed = value;
+        }
+
+        get clockSpeed() {
+            return this._clockSpeed;
+        }
+
+        set cores(value) {
+            this._cores = value;
+        }
+
+        get cores() {
+            return this._cores;
+        }
+
+        set capacity(value) {
+            this._capacity = value;
+        }
+
+        get capacity() {
+            return this._capacity;
+        }
+
+        set technicalProcess(value) {
+            this._technicalProcess = value;
+        }
+
+        get technicalProcess() {
+            return this._technicalProcess;
+        }
+
+        getInfo() {
+            let str = '<p>' + ' Тактовая частота: ' + this.clockSpeed + ' Гц' + '</p>';
+            str += '<p>' + 'Количество ядер: ' + this.cores + '</p>';
+            str += '<p>' + 'Разрядность: ' + this.capacity + '</p>';
+            str += '<p>' + 'Техпроцесс: ' + this.technicalProcess + ' нм' + '</p>';
+            return str;
+        }
+    }
+
+    let processor = new Processor(40000, 2, 32, 24);
+
+    print_string(processor.getInfo());
+
+    print_string("---");
+
+    processor.clockSpeed = 30000;
+
+    print_string(processor.getInfo());
+
+    function print_string(str) {
+        document.write("<p>");
+        document.write(str);
+        document.write("</p>");
+    }
+</script>
+</body>
+
+</html>

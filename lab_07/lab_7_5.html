@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 7.5</title>
+  <style>
+      div {
+          width: 200px;
+          height: 200px;
+          position: absolute;
+      }
+
+      #first {
+          background-color: red;
+          z-index: 1;
+      }
+
+      #second {
+          background-color: yellow;
+          margin-top: 40px;
+          margin-left: 40px;
+          z-index: 2;
+      }
+
+      #third {
+          background-color: blue;
+          margin-top: 80px;
+          margin-left: 80px;
+          z-index: 3;
+      }
+  </style>
+</head>
+
+<body>
+<div id='first'></div>
+<div id='second'></div>
+<div id='third'></div>
+
+<script>
+    "use strict"
+    let divs = document.getElementsByTagName('div');
+
+    for (const unit of divs) {
+        console.log(unit);
+        unit.addEventListener('click', changeIndex);
+    }
+
+    let maxZ = 10;
+
+    function changeIndex(event) {
+        event.currentTarget.style.zIndex = maxZ;
+        maxZ++;
+    }
+</script>
+</body>
+
+</html>

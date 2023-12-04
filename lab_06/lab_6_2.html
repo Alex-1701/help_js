@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 6.2</title>
+  <style>
+      * {
+          font-family: 'Courier New', Courier, monospace;
+      }
+  </style>
+</head>
+
+<body>
+
+<script>
+    "use strict"
+
+    function Processor(clockSpeed, cores, capacity, technicalProcess) {
+        this.clockSpeed = clockSpeed;
+        this.cores = cores;
+        this.capacity = capacity;
+        this.technicalProcess = technicalProcess;
+
+        this.getClockSpeed = function () {
+            return this.clockSpeed;
+        }
+
+        this.getCores = function () {
+            return this.cores;
+        }
+
+        this.getCapacity = function () {
+            return this.capacity;
+        }
+
+        this.getTechnicalProcess = function () {
+            return this.technicalProcess;
+        }
+    }
+
+    Processor.prototype.release;
+
+    Processor.prototype.getInfo = function () {
+        let str = '<p>' + ' Тактовая частота: ' + this.getClockSpeed() + ' Гц' + '</p>';
+        str += '<p>' + 'Количество ядер: ' + this.getCores() + '</p>';
+        str += '<p>' + 'Разрядность: ' + this.getCapacity() + '</p>';
+        str += '<p>' + 'Техпроцесс: ' + this.getTechnicalProcess() + ' нм' + '</p>';
+        str += '<p>' + 'Выход на рынок: ' + this.release + ' год' + '</p>';
+        return str;
+    }
+
+    let processor = new Processor(40000, 2, 32, 24);
+    processor.release = 2008;
+
+    print_string(processor.getInfo());
+
+    function print_string(str) {
+        document.write("<p>");
+        document.write(str);
+        document.write("</p>");
+    }
+</script>
+</body>
+
+</html>

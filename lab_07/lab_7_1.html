@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lab 7.1</title>
+  <style>
+      table {
+          border: 1px solid grey;
+          background-color: grey;
+          font-family: 'Courier New', Courier, monospace;
+          font-weight: bold;
+      }
+
+      th {
+          height: 20px;
+          border: 1px solid grey;
+          background-color: rgb(223, 223, 223);
+          padding: 5px;
+      }
+
+      td {
+          height: 20px;
+          border: 1px solid grey;
+          background-color: rgb(255, 255, 255);
+          padding: 5px;
+      }
+  </style>
+</head>
+
+<body>
+
+<script>
+    "use strict"
+
+    class Processor {
+        constructor(clockSpeed, cores, capacity, technicalProcess) {
+            this._clockSpeed = clockSpeed;
+            this._cores = cores;
+            this._capacity = capacity;
+            this._technicalProcess = technicalProcess;
+        }
+
+        set clockSpeed(value) {
+            this._clockSpeed = value;
+        }
+
+        get clockSpeed() {
+            return this._clockSpeed;
+        }
+
+        set cores(value) {
+            this._cores = value;
+        }
+
+        get cores() {
+            return this._cores;
+        }
+
+        set capacity(value) {
+            this._capacity = value;
+        }
+
+        get capacity() {
+            return this._capacity;
+        }
+
+        set technicalProcess(value) {
+            this._technicalProcess = value;
+        }
+
+        get technicalProcess() {
+            return this._technicalProcess;
+        }
+
+        getInfo() {
+            let str = '<p>' + ' Тактовая частота: ' + this.clockSpeed + ' Гц' + '</p>';
+            str += '<p>' + 'Количество ядер: ' + this.cores + '</p>';
+            str += '<p>' + 'Разрядность: ' + this.capacity + '</p>';
+            str += '<p>' + 'Техпроцесс: ' + this.technicalProcess + ' нм' + '</p>';
+            return str;
+        }
+    }
+
+    class Intel extends Processor {
+        constructor(clockSpeed, cores, capacity, technicalProcess, release, price) {
+            // Вызов родительского конструктора
+            super(clockSpeed, cores, capacity, technicalProcess);
+
+            this._release = release;
+            this._price = price;
+        }
+
+        get release() {
+            return this._release;
+        }
+
+        set release(value) {
+            this._release = value;
+        }
+
+        get price() {
+            return this._price;
+        }
+
+        set price(value) {
+            this._price = value;
+        }
+
+        getInfo() {
+            let str = '<p>' + ' Тактовая частота: ' + this.clockSpeed + ' Гц' + '</p>';
+            str += '<p>' + 'Количество ядер: ' + this.cores + '</p>';
+            str += '<p>' + 'Разрядность: ' + this.capacity + '</p>';
+            str += '<p>' + 'Техпроцесс: ' + this.technicalProcess + ' нм' + '</p>';
+            str += '<p>' + 'Выход: ' + this.release + ' год' + '</p>';
+            str += '<p>' + 'Цена: ' + this.price + ' денег' + '</p>';
+            return str;
+        }
+    }
+
+    let arr = [];
+    arr.push(new Intel(40000, 2, 32, 24, 2007, 1000));
+    arr.push(new Intel(20000, 4, 32, 16, 2009, 1500));
+    arr.push(new Intel(50000, 6, 32, 16, 2012, 23000));
+    arr.push(new Intel(2_000_000_000, 16, 64, 5, 2018, 2000000));
+    arr.push(new Intel(1_200_000_000, 24, 64, 4, 2021, 1800000, 2021));
+
+    generateTable(arr);
+
+    function generateTable(array) {
+        let prop_name = ['частота', 'ядра', 'разрядность', 'техпроцесс', 'выход', 'цена'];
+        let table = document.createElement("table");
+        let row = document.createElement("tr");
+
+        prop_name.forEach(a => {
+            let cell = document.createElement("th");
+            cell.innerText = a;
+            row.appendChild(cell);
+        });
+
+        table.appendChild(row);
+
+        array.forEach(element => {
+            let row = document.createElement("tr");
+            let properties = Object.entries(element);
+
+            properties.forEach(key => {
+                let cell = document.createElement("td");
+                cell.innerText = key[1];
+                row.appendChild(cell);
+            });
+            table.appendChild(row);
+        });
+        document.body.appendChild(table);
+    }
+</script>
+</body>
+
+</html>
