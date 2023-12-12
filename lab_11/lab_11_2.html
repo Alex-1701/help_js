@@ -67,11 +67,6 @@
     redraw_table();
 
     function redraw_table() {
-        let start_time = new Date(input_start_time.value)
-        let finish_time = new Date(input_finish_time.value)
-
-        console.log(start_time.getFullYear());
-
         // Удаляем старую таблицу если она есть.
         if ($('table').length > 0) {
             $('table').remove();
@@ -80,7 +75,7 @@
         $('body').append('<table></table>');
         $('table').append(`<tr></tr>`);
 
-        let cols = ['Дата', 'курс'];
+        const cols = ['Дата', 'курс'];
 
         for (const name of cols) {
             $('tr:last').append(`<th>${name}</th>`);
@@ -89,14 +84,13 @@
         fetch(`https://www.nbrb.by/API/ExRates/Rates/Dynamics/${new_Cur_ID}?startDate=${input_start_time.value}&endDate=${input_finish_time.value}`)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 for (const key in res) {
                     $('table').append(`<tr></tr>`);
                     if (Object.hasOwnProperty.call(res, key)) {
                         const element = res[key];
-                        console.log(element.Date, element.Cur_OfficialRate);
-                        let temp_date = new Date(element.Date);
-                        $('tr:last').append(`<td>${temp_date.getFullYear()}-${temp_date.getMonth()}-${temp_date.getDate()}</td>`);
+                        const temp_date = new Date(element.Date);
+
+                        $('tr:last').append(`<td>${temp_date.getFullYear()}-${temp_date.getMonth() + 1}-${temp_date.getDate()}</td>`);
                         $('tr:last').append(`<td>${element.Cur_OfficialRate}</td>`);
                     }
                 }
