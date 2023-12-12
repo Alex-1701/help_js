@@ -15,9 +15,9 @@
 
 <body>
 <ul>
-  <li><a href="https://example.com/">NASA</a></li>
+  <li><a href="https://www.nasa.gov/">NASA</a></li>
   <li><a href="D:/FAVICON.png">иконка</a></li>
-  <li><a href="https://example.com/">WikiPedia</a></li>
+  <li><a href="https://www.wikipedia.org/">WikiPedia</a></li>
   <li><a href="https://yandex.com/">Yandex</a></li>
   <li><a href="https://www.google.com/">Google.com</a></li>
   <li><a href="lab_7_1.html">предыдущая лаба</a></li>
@@ -35,13 +35,9 @@
             const element = object[key];
             let begin = element.href.slice(0, 5);
 
-            if (begin === 'http:' || begin === 'https:') {
-                element.style.textDecoration = 'underline';
+            if (begin === 'http:' || begin === 'https') {
                 element.style.textDecorationStyle = 'dotted';
-                element.style.color = 'black';
-            } else if (begin === 'file:') {
-                element.style.textDecoration = 'none';
-                element.style.fontFamily = "'Courier New', Courier, monospace";
+                element.style.fontStyle = 'italic';
             }
         }
     }

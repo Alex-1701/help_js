@@ -173,15 +173,9 @@
 
         const alert = document.getElementById("alert_imageCode");
 
-        if (str.length === 6) {
-            let reg = new RegExp('[0-9]{6}');
-            if (reg.test(str)) {
-                alertOff(alert);
-                return true;
-            } else {
-                alertOn(alert);
-                return false;
-            }
+        if (str === '424636') {
+            alertOff(alert);
+            return true;
         } else {
             alertOn(alert);
             return false;
